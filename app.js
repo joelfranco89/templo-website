@@ -16,7 +16,9 @@ var homeRoutes = require("./routes/home_routes.js"),
     loginRoutes = require("./routes/login_routes.js"),
     signupRoutes = require("./routes/signup_routes.js"),
     questionPageRoutes = require("./routes/question_page_routes.js"),
-    userProfileRoutes = require("./routes/user_profile_routes.js")
+    userProfileRoutes = require("./routes/user_profile_routes.js"),
+    forgotPasswordRoute = require("./routes/password_reset_route.js"),
+    adminRoutes = require("./routes/admin_routes.js")
     
 
 
@@ -54,6 +56,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use(function(req, res, next){
   //This will check if an error has occured. 
   res.locals.message = req.flash("error");
+  res.locals.message = req.flash("success");
   // currentUser is the user object name that will be called on all views
   res.locals.currentUser = req.user;
   //This allows the following code to run. If not called, the route will stop
@@ -67,6 +70,8 @@ app.use(loginRoutes);
 app.use(signupRoutes);
 app.use(questionPageRoutes);
 app.use(userProfileRoutes);
+app.use(forgotPasswordRoute);
+app.use(adminRoutes);    
 
 
 

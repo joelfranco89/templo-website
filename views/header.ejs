@@ -42,7 +42,7 @@
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle btn btn-danger" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
-						Hello <%= currentUser.fullName %>!
+						Hello <%= currentUser.username %>!
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="/profile/<%= currentUser._id %>">My profile</a>
@@ -54,6 +54,7 @@
 			<% } %>
 
 			<div class="btn-group">
+				<a href="/admin"><button class="btn btn-warning">Admin</button></a>
 				<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					Ask a new question
 				</button>

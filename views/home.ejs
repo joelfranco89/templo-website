@@ -28,9 +28,17 @@
   <div class="container text-center" style="margin-top: 80px;">    
   <% } %>
     
-    
+
   <div class="row">
-    <div class="col-lg-9">    
+
+    <div class="col-lg-9">  
+
+        <%if (message && message.length > 0){%>
+          <div class="alert alert-info">
+            <%=message%>
+          </div>
+        <%}%>
+
           <% var sortedQuestionsArray = questions.sort(function(a, b){ %>
           <% return b.views-a.views; %>
           <% }) %>

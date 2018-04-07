@@ -20,7 +20,6 @@ app.post("/signup", function(req, res){
         res.redirect("/");
       });
       user.save(user.email = req.body.email);
-      user.save(user.fullName = req.body.fullName);
     });  
   }
 });

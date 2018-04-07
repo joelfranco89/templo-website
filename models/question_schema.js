@@ -10,7 +10,8 @@ var questionSchema = new mongoose.Schema({
   views: Number,
   dateCreated: String,
   timeCreated: String,
-  answers: []
+  answers: [],
+  userEmailsArray: []
 });
 
 

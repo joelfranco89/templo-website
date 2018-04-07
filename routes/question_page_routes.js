@@ -2,13 +2,11 @@ var express = require("express"),
     app = express(),
     Question = require("../models/question_schema.js"),
     Answer = require("../models/answer_schema.js"),
-    User = require("../models/user_schema.js")
+    User = require("../models/user_schema.js"),
+    nodemailer = require("nodemailer")
 
 //Route to question page
 app.get("/question/:id", function(req, res){
-
-
-  
   Question.findById(req.params.id, function(err, question){
     if (err){
       res.send(err);
@@ -16,10 +14,7 @@ app.get("/question/:id", function(req, res){
       question.save(question.views += 1);     
       res.render("questionPage.ejs", {question: question});
       }
-  });
-  
-
-  
+  }); 
 });
 
 //Delete question route
@@ -65,25 +60,6 @@ app.get("/editanswer/:id/question/:question_id", function(req, res){
   });
 });
 
-//Update answer route
-app.put("/editanswer/:id/question/:question_id", function(req, res){
-  var answerEdited = {
-    answer: req.body.answer
-  }
-  
-  
-  Answer.findByIdAndUpdate(req.params.id, answerEdited, function(err, updatedAnswer){
-    if (err){
-      res.send(err);
-    }else{   
-      res.redirect("/question/" + req.params.question_id)
-    }
-  }); 
-  
-  
-  
-});
-
 
 //Route to post answer to question
 app.post("/question/:id/answer", function(req, res){
@@ -110,6 +86,34 @@ app.post("/question/:id/answer", function(req, res){
         }
       });
     }
+    //Alert followed emails on new answer
+    question.userEmailsArray.forEach(function(email){
+      var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'francstudiosinc@gmail.com',
+          pass: 'player73189'
+        }
+      });
+      
+      var mailOptions = {
+        from: 'francstudiosinc@gmail.com',
+        to: email,
+        subject: 'Message from the Templo team',
+        text: 'There is a new answer on the below question that you are following: \n\n' +
+              question.question + '\n\n' +
+              'Click the below link to check it out! \n\n' +
+              'http://' + req.headers.host + '/question/' + question._id 
+      };
+      
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
+    });
   }); 
 });
 
@@ -139,6 +143,38 @@ app.post("/nothelpful/:id", function(req, res){
       question.save(question.views -= 1);
       res.redirect("/question/" + req.params.id);
       
+    }
+  });
+});
+
+//Follow Question Route
+app.post("/followquestion/:id", function(req, res){
+  Question.findById(req.params.id, function(err, question){
+    if (err){
+      res.send(err);
+    }else{
+    req.flash('success', 'You are now following this questions. When someone answers this question, you will be alerted at ' + req.user.email + '. If this is not your email, you can change it on your user profile.')
+    question.userEmailsArray.unshift(req.user.email);
+    question.save();
+    res.redirect("/question/" + req.params.id);
+    }
+  });
+});
+
+//Unfollow Question Route
+app.post("/unfollowquestion/:id", function(req, res){
+  Question.findById(req.params.id, function(err, question){
+    if (err){
+      res.send(err);
+    }else{
+      req.flash("success", "You are no longer following this question");
+      for (var i = 0; i < question.userEmailsArray.length; i++){
+        if (question.userEmailsArray[0] == req.user.email){
+          question.userEmailsArray.splice(i, 1);
+        }
+      }
+      question.save();
+      res.redirect('/question/' + req.params.id);
     }
   });
 });

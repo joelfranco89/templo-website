@@ -2,9 +2,12 @@
 <div class="container" style="margin-top: 15%">
   <div class="row border">
     <div class="col-lg-12">
-      <h1><%= user.fullName %></h1>
+      <h1><%= user.username %></h1>
       <p>Number of questions asked:<span class="badge badge-secondary"><%= user.questions.length %></span></p>
       <p>Number of answers: <span class="badge badge-secondary"><%= user.answers.length %></span></p>
+      <%if (currentUser && currentUser.username == user.username){ %>
+        <a id="changeEmail" href="">Change email address</a>
+      <% } %>
     </div>
   </div>
 	<br>

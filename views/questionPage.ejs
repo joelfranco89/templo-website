@@ -12,19 +12,15 @@
   
     <div class="row">
       <%if (!currentUser){%>      
-      <div class="float-left" tabindex="0" data-toggle="tooltip" title="You need to be signed in">
-        <form action="/helpful/<%= question._id %>" method="POST">     
+      <div class="float-left"  data-toggle="tooltip" title="You need to be signed in">  
           <button type="submit" class="btn btn-danger btn-sm" style="pointer-events: none;" disabled>
             Helpful &nbsp;<i class="far fa-thumbs-up"></i>&nbsp;<%= question.helpful %>
           </button>        
-        </form>
       </div>
-      <div class="float-left" tabindex="0" data-toggle="tooltip" title="You need to be signed in">
-        <form action="/nothelpful/<%= question._id %>" method="POST">       
+      <div class="float-left"  data-toggle="tooltip" title="You need to be signed in">     
           <button type="submit" class="btn btn-danger btn-sm" style="pointer-events: none;" disabled>
             Not Helpful &nbsp;<i class="far fa-thumbs-down"></i>&nbsp;<%= question.notHelpful %>
           </button>      
-        </form>
       </div>
       <%}else{%>
       <form action="/helpful/<%= question._id %>" method="POST">
@@ -91,7 +87,7 @@
       </div>
     </div>
     
-      
+      <!-- Delete Button -->
       <%if (typeof currentUser !== "undefined" && currentUser._id == question.authorId){ %>
         <form action="/deletequestion/<%=question._id%>?_method=DELETE" method="POST">
           <button type="submit" class="btn btn-info btn-sm float-right">
@@ -99,6 +95,41 @@
           </button>   
         </form>
       <%}%>
+
+      <!-- Follow Question Button -->  
+      <% var isFollowing = false %>
+      <% question.userEmailsArray.forEach(function(email){ %>
+        <%if (currentUser && currentUser.email == email){ %>
+          <% isFollowing = true %>
+        <% } %>
+      <% });%>
+
+
+      <% if ( currentUser && isFollowing){ %>
+        <form action="/unfollowquestion/<%=question._id%>" method="POST">
+          <button class="btn btn-sm btn-secondary">Unfollow Question</button>
+        </form>
+      <% } %>
+
+
+      <% if ( currentUser && !isFollowing){ %>
+        <form action="/followquestion/<%=question._id%>" method="POST">
+          <button class="btn btn-sm btn-secondary">Follow Question</button>
+        </form>
+      <% } %>
+      
+
+
+      <%if (!currentUser){ %>
+        <div class="float-left"  data-toggle="tooltip" title="You need to be signed in">  
+            <button class="btn btn-secondary btn-sm" style="pointer-events: none;" disabled>
+              Follow Question
+            </button>        
+        </div>
+      <% } %>
+
+
+
       
 
       
@@ -112,8 +143,14 @@
 
 <div class="container" style="margin-top: 5%;">
     <div class="row">
-      
-      
+
+      <!--Message Display-->
+        <%if (message && message.length > 0){%>
+          <div class="alert alert-info">
+            <%=message%>
+          </div>
+        <%}%>   
+
       <div class="col-md-9">
         <ul class="list-group">
           <% question.answers.forEach(function(answer){ %>
@@ -148,6 +185,7 @@
 
 <script>
 $( document ).ready(function() {
+  
     $('[data-toggle="tooltip"]').tooltip();
 });
 </script>
