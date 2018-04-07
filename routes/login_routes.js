@@ -9,8 +9,6 @@ app.post("/login", passport.authenticate("local", {
   successRedirect: "/",
   failureRedirect: "/login",
   failureFlash: true
-}), function(req, res){
-    
-});
+}));
 
 module.exports = app;

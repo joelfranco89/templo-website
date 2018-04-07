@@ -13,4 +13,19 @@ app.get("/profile/:id", function(req, res){
   });
 });
 
+//Route to change email
+app.post("/changeemail/:id", function(req, res){
+    User.findById(req.params.id, function(err, user){
+      if (err){
+        req.flash("success", err);
+        res.redirect("/profile/" + req.params.id);
+      }else{
+        user.email = req.body.email.toLowerCase();
+        user.save();
+        req.flash("success", "Your email has been successfully changed to " + req.body.email.toLowerCase());
+        res.redirect("/profile/" + req.params.id);
+      }
+    });
+});
+
 module.exports = app;
