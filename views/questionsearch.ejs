@@ -14,6 +14,45 @@
   <% }); %>
 <% }; %>
 
+<!-- Removing duplicate search results -->
+<% for (i = 0; i < searchArray.length; i++){ %>
+    <%if (searchArray[i] == searchArray[i + 1]){ %>
+      <%searchArray.splice(i, 1) %>
+   <% }%>
+<% } %>
+
+<% for (i = 0; i < searchArray.length; i++){ %>
+  <%if (searchArray[i] == searchArray[i + 1]){ %>
+    <%searchArray.splice(i, 1) %>
+ <% }%>
+<% } %>
+
+<% for (i = 0; i < searchArray.length; i++){ %>
+  <%if (searchArray[i] == searchArray[i + 1]){ %>
+    <%searchArray.splice(i, 1) %>
+ <% }%>
+<% } %>
+
+<% for (i = 0; i < searchArray.length; i++){ %>
+  <%if (searchArray[i] == searchArray[i + 1]){ %>
+    <%searchArray.splice(i, 1) %>
+ <% }%>
+<% } %>
+
+<% for (i = 0; i < searchArray.length; i++){ %>
+  <%if (searchArray[i] == searchArray[i + 1]){ %>
+    <%searchArray.splice(i, 1) %>
+ <% }%>
+<% } %>
+
+<% for (i = 0; i < searchArray.length; i++){ %>
+  <%if (searchArray[i] == searchArray[i + 1]){ %>
+    <%searchArray.splice(i, 1) %>
+ <% }%>
+<% } %>
+
+<!-- End removing duplicate search result. Project for later, find a better -->
+
 
 <div class="container">
   <% if (!currentUser){ %>
