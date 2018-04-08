@@ -25,4 +25,18 @@
           <a href="/admin/answers"><button class="btn btn-sm btn-light">Answers</button></a>
 			</div>
     </nav>
+  
+   <% var reservedQuestionsArray = questions.reverse();%> 
+  <div class="container" style="margin-top: 5rem">
+  <h1>Questions</h1>
+    <% for (i = 0; i < reservedQuestionsArray.length; i++){ %>
+      <div class="row">
+        <div class="col-lg-10">      
+            <ul class="list-group">        
+                <li class="list-group-item"><%= reservedQuestionsArray[i].question %><span class="float-right"><a href="/question/<%=reservedQuestionsArray[i]._id%>"<button class="btn btn-sm btn-light">Go to question</button></a></span></li>     
+            </ul>
+        </div>
+      </div>
+    <% } %>
+  </div>
     <% include footer.ejs %>

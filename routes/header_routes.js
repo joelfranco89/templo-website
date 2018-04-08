@@ -72,14 +72,6 @@ app.post("/questionsearch", function(req, res){
   });
 });
 
-//Route to admin page
-app.get("/admin/questions", function(req, res){
-  res.render("adminQuestionPage.ejs");
-});
-//Route to admin page
-app.get("/admin/answers", function(req, res){
-  res.render("adminAnswerPage.ejs");
-});
 
 
 

@@ -32,7 +32,7 @@
   <div class="row">
 
     <div class="col-lg-9">  
-
+      
         <%if (message && message.length > 0){%>
           <div class="alert alert-info">
             <%=message%>
@@ -42,6 +42,7 @@
           <% var sortedQuestionsArray = questions.sort(function(a, b){ %>
           <% return b.views-a.views; %>
           <% }) %>
+
           <div class="list-group">
           <% for (i = 0; i < sortedQuestionsArray.length; i++) { %>        
             <a href="/question/<%= sortedQuestionsArray[i]._id %>" class="list-group-item list-group-item-action">

@@ -54,7 +54,9 @@
 			<% } %>
 
 			<div class="btn-group">
-				<a href="/admin/questions"><button class="btn btn-warning">Admin</button></a>
+				<% if (currentUser && currentUser.isAdmin){ %>
+					<a href="/admin/questions"><button class="btn btn-warning">Admin</button></a>
+				<%}%>	
 				<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					Ask a new question
 				</button>

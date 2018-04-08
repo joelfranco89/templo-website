@@ -29,6 +29,13 @@ app.delete('/deletequestion/:id', function(req, res){
   });
 });
 
+//Admin delete question route
+app.delete('/admindeletequestion/:id', function(req, res){
+  Question.findByIdAndRemove(req.params.id, function(err){
+    res.redirect("/");
+  });
+});
+
 //Delete answer route
 app.delete('/deleteanswer/:id/question/:question_id', function(req, res){
   Answer.findByIdAndRemove(req.params.id, function(err){
@@ -37,6 +44,21 @@ app.delete('/deleteanswer/:id/question/:question_id', function(req, res){
         req.user.save(req.user.answers.splice(i, 1));
       }
     }
+  });
+  Question.findById(req.params.question_id, function(err, question){
+     for (i = 0; question.answers.length; i++){
+       if (question.answers[i]._id == req.params.id){
+         question.save(question.answers.splice(i, 1));
+       }
+     }
+  });  
+  res.redirect("/question/" + req.params.question_id);
+});
+
+//Admin delete answer route
+app.delete('/admindeleteanswer/:id/question/:question_id', function(req, res){
+  Answer.findByIdAndRemove(req.params.id, function(err){
+    
   });
   Question.findById(req.params.question_id, function(err, question){
      for (i = 0; question.answers.length; i++){

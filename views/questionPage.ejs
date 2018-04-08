@@ -96,6 +96,16 @@
         </form>
       <%}%>
 
+      <!--Admin delete button-->
+            <!-- Delete Button -->
+            <%if ( currentUser && currentUser.isAdmin){ %>
+              <form action="/admindeletequestion/<%=question._id%>?_method=DELETE" method="POST">
+                <button type="submit" class="btn btn-info btn-sm float-right">
+                Delete
+                </button>   
+              </form>
+            <%}%>
+
       <!-- Follow Question Button -->  
       <% var isFollowing = false %>
       <% question.userEmailsArray.forEach(function(email){ %>
@@ -158,6 +168,11 @@
               <p><%= answer.answer %></p>
               <% if (typeof currentUser !== "undefined" && currentUser._id == answer.authorId){ %>  
                 <form action="/deleteanswer/<%=answer._id%>/question/<%=answer.questionId%>?_method=DELETE" method="POST">
+                  <button type="submit" class="btn btn-sm btn-outline-danger float-right">Delete</button>
+                </form>
+              <% } %>
+              <% if (currentUser && currentUser.isAdmin){ %>  
+                <form action="/admindeleteanswer/<%=answer._id%>/question/<%=answer.questionId%>?_method=DELETE" method="POST">
                   <button type="submit" class="btn btn-sm btn-outline-danger float-right">Delete</button>
                 </form>
               <% } %>
