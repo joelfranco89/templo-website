@@ -9,7 +9,8 @@ var express = require("express"),
     localStrategy = require("passport-local"),
     flash = require("connect-flash"),
     User = require("./models/user_schema.js"),
-    Answer = require("./models/answer_schema.js")
+    Answer = require("./models/answer_schema.js"),
+    MotivationalQuote = require("./models/motivational_quotes.js")
 
 var homeRoutes = require("./routes/home_routes.js"),
     headerRoutes = require("./routes/header_routes.js"),
@@ -71,7 +72,7 @@ app.use(signupRoutes);
 app.use(questionPageRoutes);
 app.use(userProfileRoutes);
 app.use(forgotPasswordRoute);
-app.use(adminRoutes);    
+app.use(adminRoutes);      
 
 
 

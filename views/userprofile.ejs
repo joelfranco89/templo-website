@@ -29,11 +29,12 @@
           </form>
         <% } %>
     </div>
-
-
-
   </div>
-	<br>
+
+
+  <br>
+  
+  
  <div class="row">
 	 <div class="col-lg-2">
 	  	<h6>Feed</h6>
@@ -41,6 +42,7 @@
       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
           <a class="nav-link active" id="v-pills-questions-tab" data-toggle="pill" href="#v-pills-questions" role="tab" aria-controls="v-pills-questions" aria-selected="true">Questions</a>
           <a class="nav-link" id="v-pills-answers-tab" data-toggle="pill" href="#v-pills-answers" role="tab" aria-controls="v-pills-answers" aria-selected="false">Answers</a>
+          <a class="nav-link" id="v-pills-questionFollows-tab" data-toggle="pill" href="#v-pills-questionFollows" role="tab" aria-controls="v-pills-questionFollows" aria-selected="false">Following</a>
         </div>
 	</div>
   <div class="col-lg-10" id="activityContainer">
@@ -52,7 +54,7 @@
           <div class="tab-pane fade show active" id="v-pills-questions" role="tabpanel" aria-labelledby="v-pills-questions-tab">
               <ul class="list-group">
                   <% for (i = 0; i < user.questions.length ; i++){ %>
-                      <a href="/question/<%=user.questions[i]._id%>" class="list-group-item list-group-item-action"><%=user.questions[i].question %></a>
+                      <a href="/question/<%=user.questions[i]._id%>" class="list-group-item list-group-item-action"><%=user.questions[i].question.charAt(0).toUpperCase() + user.questions[i].question.slice(1) %></a>
                   <% } %>
                 </ul>
           </div>
@@ -61,14 +63,21 @@
                   <% for (i = 0; i < user.answers.length ; i++){ %>
                     <li class="list-group-item">
                       <a href="/question/<%= user.answers[i].questionId%>" class="text-dark">
-                        <h2><%= user.answers[i].questionText %></h2>
+                        <h5><%= user.answers[i].questionText.charAt(0).toUpperCase() + user.answers[i].questionText.slice(1) %></h5>
                       </a>
                       <p>
-                        <strong><%= user.username %>'s answer:&nbsp</strong><%= user.answers[i].answer %> 
+                        <strong><%= user.username %>'s answer:&nbsp</strong><%= user.answers[i].answer.charAt(0).toUpperCase() + user.answers[i].answer.slice(1) %> 
                       <p>
                     </li>
                   <% } %>
                 </ul>
+          </div>
+          <div class="tab-pane fade" id="v-pills-questionFollows" role="tabpanel" aria-labelledby="v-pills-answers-tab">
+            <ul class="list-group">
+              <% for (i = 0; i < user.followedQuestions.length ; i++){ %>
+                  <a href="/question/<%=user.followedQuestions[i]._id%>" class="list-group-item list-group-item-action"><%=user.followedQuestions[i].question.charAt(0).toUpperCase() + user.followedQuestions[i].question.slice(1) %></a>
+              <% } %>
+            </ul>
           </div>
         </div>
     

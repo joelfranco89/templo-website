@@ -8,12 +8,14 @@ var express = require("express"),
 //Route to question page
 app.get("/question/:id", function(req, res){
   Question.findById(req.params.id, function(err, question){
-    if (err){
+    if (!question){
+      res.send("This question has been removed");
+    }else if (err){  
       res.send(err);
     }else{
-      question.save(question.views += 1);     
+      question.save(question.views += 1);   
       res.render("questionPage.ejs", {question: question});
-      }
+    }
   }); 
 });
 
@@ -25,6 +27,7 @@ app.delete('/deletequestion/:id', function(req, res){
         req.user.save(req.user.questions.splice(i, 1));
       }
     }
+    
     res.redirect("/");
   });
 });
@@ -46,11 +49,12 @@ app.delete('/deleteanswer/:id/question/:question_id', function(req, res){
     }
   });
   Question.findById(req.params.question_id, function(err, question){
-     for (i = 0; question.answers.length; i++){
-       if (question.answers[i]._id == req.params.id){
-         question.save(question.answers.splice(i, 1));
-       }
-     }
+    for (var i = 0; i < question.answers.length; i++){
+      if (question.answers[i]._id == req.params.id){
+        question.answers.splice(i, 1);
+        question.save();
+      }
+    }
   });  
   res.redirect("/question/" + req.params.question_id);
 });
@@ -61,13 +65,21 @@ app.delete('/admindeleteanswer/:id/question/:question_id', function(req, res){
     
   });
   Question.findById(req.params.question_id, function(err, question){
-     for (i = 0; question.answers.length; i++){
-       if (question.answers[i]._id == req.params.id){
-         question.save(question.answers.splice(i, 1));
-       }
-     }
-  });  
-  res.redirect("/question/" + req.params.question_id);
+    for (i = 0; question.answers.length; i++){
+      if (question.answers[i]._id == req.params.id){
+        question.save(question.answers.splice(i, 1));
+      }
+    }
+ });  
+ Question.findById(req.params.question_id, function(err, question){
+  for (var i = 0; i < question.answers.length; i++){
+    if (question.answers[i]._id == req.params.id){
+      question.answers.splice(i, 1);
+      question.save();
+    }
+  }
+});  
+ res.redirect("/question/" + req.params.question_id);
 });
 
 //Edit answer route
@@ -177,6 +189,8 @@ app.post("/followquestion/:id", function(req, res){
     }else{
     req.flash('success', 'You are now following this questions. When someone answers this question, you will be alerted at ' + req.user.email + '. If this is not your email, you can change it on your user profile.')
     question.userEmailsArray.unshift(req.user.email);
+    req.user.followedQuestions.unshift(question)
+    req.user.save();
     question.save();
     res.redirect("/question/" + req.params.id);
     }
@@ -195,6 +209,12 @@ app.post("/unfollowquestion/:id", function(req, res){
           question.userEmailsArray.splice(i, 1);
         }
       }
+      for (var i = 0; i < req.user.followedQuestions.length; i++){
+        if (req.params.id == req.user.followedQuestions[i]._id){
+          req.user.followedQuestions.splice(i, 1);
+        }
+      }
+      req.user.save();
       question.save();
       res.redirect('/question/' + req.params.id);
     }

@@ -9,7 +9,8 @@ var UserSchema = new mongoose.Schema({
   resetPasswordExpires: Date,
   questions: [],
   answers: [],
-  isAdmin: Boolean 
+  followedQuestions: [],
+  isAdmin: Boolean
 });
 
 UserSchema.plugin(passportLocalMongoose);

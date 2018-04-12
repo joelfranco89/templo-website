@@ -2,37 +2,36 @@
 
 
 
-<div class="container text-center border" style="margin-top: 80px;">
-  <div class="row" style="margin: 5%;">
+<div class="container text-center" style="margin-top: 80px;">
+  <div class="jumbotron">
     <blockquote class="blockquote text-center">
-      <h1 class="mb-0" style="text-align: left;"><%= question.question %></h1>
+      <h1 class="mb-0" style="text-align: left;"><%= question.question.charAt(0).toUpperCase() + question.question.slice(1) %></h1>
       <footer class="blockquote-footer">Non medial questions will be removed</footer>
     </blockquote>
-  </div>
   
     <div class="row">
       <%if (!currentUser){%>      
       <div class="float-left"  data-toggle="tooltip" title="You need to be signed in">  
-          <button type="submit" class="btn btn-danger btn-sm" style="pointer-events: none;" disabled>
+          <button type="submit" class="btn btn-dark btn-sm" style="pointer-events: none;" disabled>
             Helpful &nbsp;<i class="far fa-thumbs-up"></i>&nbsp;<%= question.helpful %>
           </button>        
       </div>
       <div class="float-left"  data-toggle="tooltip" title="You need to be signed in">     
-          <button type="submit" class="btn btn-danger btn-sm" style="pointer-events: none;" disabled>
+          <button type="submit" class="btn btn-dark btn-sm" style="pointer-events: none;" disabled>
             Not Helpful &nbsp;<i class="far fa-thumbs-down"></i>&nbsp;<%= question.notHelpful %>
           </button>      
       </div>
       <%}else{%>
       <form action="/helpful/<%= question._id %>" method="POST">
         <div>
-          <button type="submit" class="btn btn-danger btn-sm float-left" type="button">
+          <button type="submit" class="btn btn-dark btn-sm float-left" type="button">
             Helpful &nbsp;<i class="far fa-thumbs-up"></i>&nbsp;<%= question.helpful %>
           </button>
         </div>
       </form>
       <form action="/nothelpful/<%= question._id %>" method="POST">
         <div>
-          <button type="submit" class="btn btn-danger btn-sm float-left" type="button">
+          <button type="submit" class="btn btn-dark btn-sm float-left" type="button">
             Not Helpful &nbsp;<i class="far fa-thumbs-down"></i>&nbsp;<%= question.notHelpful %>
           </button>
         </div>
@@ -53,11 +52,11 @@
       
     <!-- Button trigger modal -->
     <% if (question.answers.length == 0) { %>
-      <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#exampleModal">
+      <button type="button" class="btn btn-dark btn-sm float-right" data-toggle="modal" data-target="#exampleModal">
         Be the first to answer this question
       </button>  
     <% }else{ %>
-      <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#exampleModal">
+      <button type="button" class="btn btn-dark btn-sm float-right" data-toggle="modal" data-target="#exampleModal">
         Answer
       </button>  
     <% } %>
@@ -88,23 +87,15 @@
     </div>
     
       <!-- Delete Button -->
-      <%if (typeof currentUser !== "undefined" && currentUser._id == question.authorId){ %>
+      <%if (currentUser && currentUser._id == question.authorId || currentUser && currentUser.isAdmin){ %>
         <form action="/deletequestion/<%=question._id%>?_method=DELETE" method="POST">
-          <button type="submit" class="btn btn-info btn-sm float-right">
+          <button type="submit" class="btn btn-dark btn-sm float-right">
           Delete
           </button>   
         </form>
       <%}%>
 
-      <!--Admin delete button-->
-            <!-- Delete Button -->
-            <%if ( currentUser && currentUser.isAdmin){ %>
-              <form action="/admindeletequestion/<%=question._id%>?_method=DELETE" method="POST">
-                <button type="submit" class="btn btn-info btn-sm float-right">
-                Delete
-                </button>   
-              </form>
-            <%}%>
+
 
       <!-- Follow Question Button -->  
       <% var isFollowing = false %>
@@ -117,14 +108,14 @@
 
       <% if ( currentUser && isFollowing){ %>
         <form action="/unfollowquestion/<%=question._id%>" method="POST">
-          <button class="btn btn-sm btn-secondary">Unfollow Question</button>
+          <button class="btn btn-sm btn-dark">Unfollow Question</button>
         </form>
       <% } %>
 
 
       <% if ( currentUser && !isFollowing){ %>
         <form action="/followquestion/<%=question._id%>" method="POST">
-          <button class="btn btn-sm btn-secondary">Follow Question</button>
+          <button class="btn btn-sm btn-dark">Follow Question</button>
         </form>
       <% } %>
       
@@ -132,7 +123,7 @@
 
       <%if (!currentUser){ %>
         <div class="float-left"  data-toggle="tooltip" title="You need to be signed in">  
-            <button class="btn btn-secondary btn-sm" style="pointer-events: none;" disabled>
+            <button class="btn btn-dark btn-sm" style="pointer-events: none;" disabled>
               Follow Question
             </button>        
         </div>
@@ -144,6 +135,9 @@
 
       
       
+   </div>
+   </div>
+   </div>
    </div>
 </div>
 
@@ -162,17 +156,12 @@
         <%}%>   
 
       <div class="col-md-9">
-        <ul class="list-group">
+        <ul class="list-group text-left">
           <% question.answers.forEach(function(answer){ %>
             <li class="list-group-item">
               <p><%= answer.answer %></p>
-              <% if (typeof currentUser !== "undefined" && currentUser._id == answer.authorId){ %>  
+              <% if (typeof currentUser !== "undefined" && currentUser._id == answer.authorId || currentUser && currentUser.isAdmin){ %>  
                 <form action="/deleteanswer/<%=answer._id%>/question/<%=answer.questionId%>?_method=DELETE" method="POST">
-                  <button type="submit" class="btn btn-sm btn-outline-danger float-right">Delete</button>
-                </form>
-              <% } %>
-              <% if (currentUser && currentUser.isAdmin){ %>  
-                <form action="/admindeleteanswer/<%=answer._id%>/question/<%=answer.questionId%>?_method=DELETE" method="POST">
                   <button type="submit" class="btn btn-sm btn-outline-danger float-right">Delete</button>
                 </form>
               <% } %>
@@ -184,12 +173,12 @@
       
       
       <div class="col-md-3">
-        Something will go here.
+        <!--Ads will possibly be displayed here-->
       </div>
       
     </div>
-</div>
 
+</div>
 
 
 

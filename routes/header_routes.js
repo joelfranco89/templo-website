@@ -3,7 +3,9 @@ var express = require("express"),
     passport = require("passport"),
     User = require("../models/user_schema.js"),
     Question = require("../models/question_schema.js"),
-    moment = require('moment')
+    moment = require('moment'),
+    flash = require("connect-flash")
+    
 
 
 // Signup page route
@@ -44,20 +46,21 @@ app.post("/newquestion", function(req, res){
                       dateCreated: moment().format('MMM Do YYYY'),
                       timeCreated: moment().format('LT'),
                     }
-  Question.create(newQuestion, function(err, newQuestion){
-    if (err){
-      res.send(err);
-    }else{
-      if (!req.user){
-        newQuestion.save(newQuestion.authorId = "Guest")
+
+    Question.create(newQuestion, function(err, newQuestion){
+      if (err){
+        res.send(err);
       }else{
-        req.user.save(req.user.questions.unshift(newQuestion));
-        newQuestion.save(newQuestion.authorId = req.user._id);
-        newQuestion.save(newQuestion.authorUsername = req.user.username);
+        if (!req.user){
+          newQuestion.save(newQuestion.authorId = "Guest")
+        }else{
+          req.user.save(req.user.questions.unshift(newQuestion));
+          newQuestion.save(newQuestion.authorId = req.user._id);
+          newQuestion.save(newQuestion.authorUsername = req.user.username);
+        }
+        res.redirect("/question/" + newQuestion._id);
       }
-      res.redirect("/question/" + newQuestion._id);
-    }
-  });
+    });
 });
 
 //New search route

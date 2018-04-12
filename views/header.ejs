@@ -6,20 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		
   </head>
   <body>
 		
 		<!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 		
+	<style>
+		#temploLogo{
+			font-family: "Comic Sans MS"
+		}
+
+		body{
+			background-color: #f7f7f7;
+		}
+		
+	</style>
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-		<a class="navbar-brand text-danger" href="/">Templo</a>
+		<a class="navbar-brand text-danger" href="/" id="temploLogo">TEMPLO</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -41,7 +53,7 @@
 			<% }else{ %>
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle btn btn-danger" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+					<a class="nav-link dropdown-toggle btn btn-sm btn-danger" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
 						Hello <%= currentUser.username %>!
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -53,16 +65,16 @@
 			</ul>
 			<% } %>
 
-			<div class="btn-group">
+			<div class="btn-group" style="margin-right: 5px;">
 				<% if (currentUser && currentUser.isAdmin){ %>
 					<a href="/admin/questions"><button class="btn btn-warning">Admin</button></a>
 				<%}%>	
-				<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					Ask a new question
 				</button>
 				<div class="dropdown-menu">
 					<form class="px-4 py-3" action="/newquestion" method="POST">
-							<textarea name="question"></textarea>
+							<textarea name="question" maxlength="150"></textarea>
 						<div class="dropdown-divider"></div>
 						<button type="submit" class="btn btn-primary">Submit</button>
 					</form>
@@ -73,7 +85,7 @@
 
 			<form class="form-inline my-2 my-lg-0" action="/questionsearch" method="POST">
 				<input name="searchInput" class="form-control mr-sm-2" type="text" placeholder="Search Templo" aria-label="Search">
-				<button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
+				<button class="btn btn-sm btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
 			</form>
 		</div>
 	</nav>
