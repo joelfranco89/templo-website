@@ -21,6 +21,10 @@
 		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 		
 	<style>
+		@font-face {
+			font-family: "Comic Sans MS";
+			src: url("http://allfont.net/allfont.css?fonts=comic-sans-ms");
+		}
 		#temploLogo{
 			font-family: "Comic Sans MS"
 		}
@@ -68,6 +72,7 @@
 				</li>
 			</ul>
 			<% } %>
+			
 
 			<div class="btn-group" style="margin-right: 5px;">
 				<% if (currentUser && currentUser.isAdmin){ %>
