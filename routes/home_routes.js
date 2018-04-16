@@ -15,7 +15,6 @@ app.get("/", function(req, res){
     quote.forEach(function(quote){
       quotesArray.unshift(quote);
     });
-    console.log(quotesArray)
   });
 
   Question.find(function(err, questions){

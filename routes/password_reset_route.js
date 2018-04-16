@@ -24,7 +24,7 @@ var express = require("express"),
           function(token, done) {
             User.findOne({ email: req.body.email.toLowerCase() }, function(err, user) {
               if (!user) {
-                req.flash('error', 'No account with that email address exists.');
+                req.flash('success', 'No account with that email address exists.');
                 return res.redirect('/forgotpassword');
               }
       
@@ -70,7 +70,7 @@ var express = require("express"),
       app.get('/reset/:token', function(req, res) {
         User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
           if (!user) {
-            req.flash('error', 'Password reset token is invalid or has expired.');
+            req.flash('success', 'Password reset token is invalid or has expired.');
             return res.redirect('/forgot');
           }
           res.render('resetPasswordPage.ejs', {token: req.params.token});
@@ -83,7 +83,7 @@ var express = require("express"),
           function(done) {
             User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
               if (!user) {
-                req.flash('error', 'Password reset token is invalid or has expired.');
+                req.flash('success', 'Password reset token is invalid or has expired.');
                 return res.redirect('back');
               }
               if(req.body.password === req.body.confirmpassword) {
@@ -98,7 +98,7 @@ var express = require("express"),
                   });
                 })
               } else {
-                  req.flash("error", "Passwords do not match.");
+                  req.flash("success", "Passwords do not match.");
                   return res.redirect('back');
               }
             });

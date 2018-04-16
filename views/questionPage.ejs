@@ -5,8 +5,13 @@
 <div class="container text-center" style="margin-top: 80px;">
   <div class="jumbotron">
     <blockquote class="blockquote text-center">
-      <h1 class="mb-0" style="text-align: left;"><%= question.question.charAt(0).toUpperCase() + question.question.slice(1) %></h1>
-      <footer class="blockquote-footer">Non medial questions will be removed</footer>
+      <h1 class="mb-0 text-left"><%= question.question.charAt(0).toUpperCase() + question.question.slice(1) %></h1>
+      <footer class="blockquote-footer text-left">Non medical related questions will be removed</footer>
+      <br>
+      <footer class="blockquote-footer text-left">
+        DISCLAIMER: Answers are not intended to be professional medical advice. 
+        Please consult with your doctor if you need to seek medical professional advice.
+      </footer>
     </blockquote>
   
     <div class="row">
@@ -191,6 +196,8 @@
 $( document ).ready(function() {
   
     $('[data-toggle="tooltip"]').tooltip();
+
+
 });
 </script>
 

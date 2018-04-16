@@ -1,6 +1,6 @@
 <% include header.ejs %>
 
-<link href="css/home.css" rel="stylesheet">
+
 
 
 
@@ -8,15 +8,19 @@
 
   <% if (!currentUser){ %>
     <div class=" jumbotron jumbotron-signed-in" style="margin-top: 5rem">
-      <p class="lead"><em>Join the growing community of people sharing their physical and mental pain</em></p>
-      <em class="lead" id="quotes"></em>
-      <footer class="blockquote-footer" id="author"></footer>
+      <p class="lead"><em><strong>Join the growing community of people sharing their physical and mental pain</strong></em></p>
+      <div class="quotesDiv">
+        <em class="lead quote-font" id="quotes"></em>
+        <footer class="blockquote-footer" id="author"></footer>
+      </div>
     </div>
   <% }else{ %>
     <div class=" jumbotron jumbotron-signed-in" style="margin-top: 5rem">
-      <p class="lead"><em>What are your symptons? Finally find answers from people with the same issues from around the world!</em></p>
-      <em class="lead" id="quotes"></em>
-      <footer class="blockquote-footer" id="author"></footer>
+      <p class="lead"><em><strong>What are your symptons? Finally find answers from people with the same issues from around the world!</strong></em></p>
+      <div class="quotesDiv">
+        <em class="lead quote-font" id="quotes"></em>
+        <footer class="blockquote-footer" id="author"></footer>
+      </div>
     </div>  
     
   <% } %>
@@ -160,13 +164,57 @@
   </div>
 
 </div>
+
 <style>
   @media only screen and (max-width: 760px) {
     .icons{
       display: none;
     }
+
+    em{
+      font-size: 20px;
+    }
+    
+    .jumbotron{
+      height: 330px;
+      position: relative; 
+    }
+
+  .quotesDiv{
+    position: absolute;
+    bottom: 0;
   }
+
+  }
+
+    @media only screen and (min-width: 761px) {
+
+    em{
+      font-size: 30px;
+    }
+
+    footer{
+      font-size: 20px;
+    }
+    
+
+  .jumbotron{
+    height: 250px;
+    position: relative; 
+
+
+  }
+
+  .quotesDiv{
+    position: absolute;
+    bottom: 0;
+  }
+  }
+  
+
+
 </style>
+
 <script>
   $(document).ready(function(){
     

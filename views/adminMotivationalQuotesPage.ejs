@@ -33,10 +33,11 @@
     <form action="/admin/motivationalquotes" method="POST">
         <div class="form-row">
             <div class="form-group col-6">
-                <input type="text" name="quote" placeholder="Quote">
-                <input type="text" name="author" placeholder="Author">
+                <input class="form-control" type="text" name="author" placeholder="Author">
+                <textarea  rows="5"class="form-control" type="text" name="quote" placeholder="Quote" maxlength="210"></textarea>             
                 <button type="submit" class="btn btn-sm btn-primary">Add</button>
             </div>
+            
         </div>
     </form>
       <% for (i = 0; i < quotes.length; i++){ %>

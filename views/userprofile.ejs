@@ -10,10 +10,16 @@
     </div>
   </div>
   <div class="row border">
+    <div class="col-lg-12 text-center" style="margin-bottom: 20px;">
+        <h1><%= user.username %></h1>
+    </div>
     <div class="col-lg-4">
-      <h1><%= user.username %></h1>
+      
       <p>Number of questions asked:<span class="badge badge-secondary"><%= user.questions.length %></span></p>
       <p>Number of answers: <span class="badge badge-secondary"><%= user.answers.length %></span></p>
+    </div>
+    <div class="col-lg-4">
+      <!-- Empty div -->
     </div>
     <div class="col-lg-4">
         <%if (currentUser && currentUser.username == user.username){ %>
@@ -35,7 +41,7 @@
   <br>
   
   
- <div class="row">
+ <div class="row" style="height: 100%;">
 	 <div class="col-lg-2">
 	  	<h6>Feed</h6>
 	  	<hr>
@@ -85,6 +91,8 @@
   </div>
   </div>
 </div>
+
+
 
 
 <script>

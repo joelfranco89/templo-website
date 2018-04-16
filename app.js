@@ -19,7 +19,8 @@ var homeRoutes = require("./routes/home_routes.js"),
     questionPageRoutes = require("./routes/question_page_routes.js"),
     userProfileRoutes = require("./routes/user_profile_routes.js"),
     forgotPasswordRoute = require("./routes/password_reset_route.js"),
-    adminRoutes = require("./routes/admin_routes.js")
+    adminRoutes = require("./routes/admin_routes.js"),
+    footerRoutes = require("./routes/footer_routes.js")
     
 
 
@@ -72,7 +73,8 @@ app.use(signupRoutes);
 app.use(questionPageRoutes);
 app.use(userProfileRoutes);
 app.use(forgotPasswordRoute);
-app.use(adminRoutes);      
+app.use(adminRoutes);     
+app.use(footerRoutes); 
 
 
 
