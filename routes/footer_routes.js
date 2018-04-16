@@ -31,7 +31,8 @@ app.post("/contact", function(req, res){
 });
 
 app.get("/aboutpage", function(req, res){
-  res.render("aboutPage.ejs")
+  var url = req.headers.host
+  res.render("aboutPage.ejs", {url: url})
 });
 
 module.exports = app;
