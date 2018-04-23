@@ -113,7 +113,7 @@
         <% var sortedAnsweredArray = questions.sort(function(a, b){ %>
         <% return b.answerCount-a.answerCount; %>
         <% }) %>
-        <% for (i = 0; i < 5; i++){ %>
+        <% for (i = 0; i < sortedAnsweredArray; i++){ %>
         <a href="/question/<%= sortedAnsweredArray[i]._id %>"><p class="text-dark"><%= sortedAnsweredArray[i].question.charAt(0).toUpperCase() + sortedAnsweredArray[i].question.slice(1)%></p></a>
         <br>
         <% } %>
@@ -127,7 +127,7 @@
         <% var sortedViewsArray = questions.sort(function(a, b){ %>
         <% return b.views-a.views; %>
         <% }) %>
-        <% for (i = 0; i < 5; i++){ %>
+        <% for (i = 0; i < sortedViewsArray; i++){ %>
           <a href="/question/<%= sortedViewsArray[i]._id %>"><p class="text-dark"><%= sortedViewsArray[i].question.charAt(0).toUpperCase() + sortedViewsArray[i].question.slice(1)%></p></a>
           <br>
         <% } %>
@@ -142,7 +142,7 @@
         <% var sortedHelpfulArray = questions.sort(function(a, b){ %>
         <% return b.helpful-a.helpful; %>
         <% }) %>
-        <% for (i = 0; i < 5; i++){ %>
+        <% for (i = 0; i < sortedHelpfulArray; i++){ %>
         <a href="/question/<%= sortedHelpfulArray[i]._id %>"><p class="text-dark"><%= sortedHelpfulArray[i].question.charAt(0).toUpperCase() + sortedHelpfulArray[i].question.slice(1)%></p></a>
         <br>
         <% } %>
@@ -158,7 +158,7 @@
         <% var sortedNotHelpfulArray = questions.sort(function(a, b){ %>
         <% return b.notHelpful-a.notHelpful; %>
         <% }) %>
-        <% for (i = 0; i < 5; i++){ %>
+        <% for (i = 0; i < sortedNotHelpfulArray; i++){ %>
         <a href="/question/<%= sortedNotHelpfulArray[i]._id %>"><p class="text-dark"><%= sortedNotHelpfulArray[i].question.charAt(0).toUpperCase() + sortedNotHelpfulArray[i].question.slice(1)%></p></a>
         <br>
         <% } %>
