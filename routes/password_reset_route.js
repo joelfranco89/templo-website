@@ -40,15 +40,15 @@ var express = require("express"),
             var smtpTransport = nodemailer.createTransport({
               service: 'Gmail', 
               auth: {
-                user: 'francstudiosinc@gmail.com',
-                pass: "player73189"
+                user: 'joelfranco@templousa.com',
+                pass: process.env.EMAILPASSWORD
               }
             });
             var mailOptions = {
               to: user.email,
-              from: 'francstudiosinc@gmail.com',
+              from: 'support@templousa.com',
               subject: 'Templo Password Reset',
-              text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+              text: 'You are receiving this because you (or someone else) has requested the reset of the password for your account.\n\n' +
                 'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
                 'http://' + req.headers.host + '/reset/' + token + '\n\n' +
                 'If you did not request this, please ignore this email and your password will remain unchanged.\n'

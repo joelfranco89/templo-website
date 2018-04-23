@@ -9,7 +9,8 @@ var express = require("express"),
 app.get("/question/:id", function(req, res){
   Question.findById(req.params.id, function(err, question){
     if (!question){
-      res.send("This question has been removed");
+      req.flash("success", "Question has been deleted by the author or an administrator")
+      res.redirect("back");
     }else if (err){  
       res.send(err);
     }else{
@@ -82,17 +83,6 @@ app.delete('/admindeleteanswer/:id/question/:question_id', function(req, res){
  res.redirect("/question/" + req.params.question_id);
 });
 
-//Edit answer route
-app.get("/editanswer/:id/question/:question_id", function(req, res){
-  var answerToEditId = {answer: req.params.id}
-  Question.findById(req.params.question_id, function(err, question){
-    if (err){
-      res.send(err);
-    }else{
-      res.render("editAnswer.ejs", {question: question, answerToEditId: answerToEditId})
-    }
-  });
-});
 
 
 //Route to post answer to question
@@ -106,19 +96,24 @@ app.post("/question/:id/answer", function(req, res){
     if (err){
       res.send(err);
     }else{
-      Answer.create(newAnswer, function(err, newAnswer){
-        if (err){
-          res.send(err);
-        }else{
-            if (req.user){
-              newAnswer.save(newAnswer.questionText = question.question);
-              newAnswer.save(newAnswer.authorId = req.user._id);
-              req.user.save(req.user.answers.unshift(newAnswer));
-            }
-          question.save(question.answers.unshift(newAnswer));
-          res.redirect("/question/" + req.params.id);
-        }
-      });
+      if (req.body.answer.length < 20){
+        req.flash("success", "Answer needs to be longer than 20 characters");
+        res.redirect("back");
+      }else{
+        Answer.create(newAnswer, function(err, newAnswer){
+          if (err){
+            res.send(err);
+          }else{
+              if (req.user){
+                newAnswer.save(newAnswer.questionText = question.question);
+                newAnswer.save(newAnswer.authorId = req.user._id);
+                req.user.save(req.user.answers.unshift(newAnswer));
+              }
+              question.save(question.answers.unshift(newAnswer));
+              res.redirect("/question/" + req.params.id);
+          }
+        });
+      }
     }
     //Alert followed emails on new answer
     question.userEmailsArray.forEach(function(email){
@@ -158,7 +153,28 @@ app.post("/helpful/:id", function(req, res){
     if (err){
       res.send(err);
     }else{
+      question.save(question.usersMarkedHelpful.unshift(req.user.username))
       question.save(question.helpful += 1);
+      question.save(question.views -= 1);
+      res.redirect("/question/" + req.params.id);
+
+    }
+  });
+});
+
+//Unmark Helpful Route
+
+app.post("/unmarkhelpful/:id", function(req, res){
+  Question.findById(req.params.id, function(err, question){
+    if (err){
+      res.send(err);
+    }else{
+      for (var i = 0; i < question.usersMarkedHelpful.length; i++){
+        if (req.user.username == question.usersMarkedHelpful[i]){
+          question.save(question.usersMarkedHelpful.splice(i, 1))
+        }
+      }
+      question.save(question.helpful -= 1);
       question.save(question.views -= 1);
       res.redirect("/question/" + req.params.id);
 
@@ -173,6 +189,7 @@ app.post("/nothelpful/:id", function(req, res){
     if (err){
       res.send(err);
     }else{
+      question.save(question.usersMarkedUnhelpful.unshift(req.user.username))
       question.save(question.notHelpful += 1);
       question.save(question.views -= 1);
       res.redirect("/question/" + req.params.id);
@@ -181,13 +198,35 @@ app.post("/nothelpful/:id", function(req, res){
   });
 });
 
+// Unmark Non-helpful Route
+
+app.post("/unmarknothelpful/:id", function(req, res){
+  Question.findById(req.params.id, function(err, question){
+    if (err){
+      res.send(err);
+    }else{
+      for (var i = 0; i < question.usersMarkedUnhelpful.length; i++){
+        if (req.user.username == question.usersMarkedUnhelpful[i]){
+          question.save(question.usersMarkedUnhelpful.splice(i, 1))
+        }
+      }
+      question.save(question.notHelpful -= 1);
+      question.save(question.views -= 1);
+      res.redirect("/question/" + req.params.id);
+      
+    }
+  });
+});
+
+
+
 //Follow Question Route
 app.post("/followquestion/:id", function(req, res){
   Question.findById(req.params.id, function(err, question){
     if (err){
       res.send(err);
     }else{
-    req.flash('success', 'You are now following this questions. When someone answers this question, you will be alerted at ' + req.user.email + '. If this is not your email, you can change it on your user profile.')
+    req.flash('success', 'You are now following this question. When someone answers this question, you will be alerted at ' + req.user.email + '. If this is not your email, you can change it on your user profile.')
     question.userEmailsArray.unshift(req.user.email);
     req.user.followedQuestions.unshift(question)
     req.user.save();
@@ -220,5 +259,7 @@ app.post("/unfollowquestion/:id", function(req, res){
     }
   });
 });
+
+
 
 module.exports = app;

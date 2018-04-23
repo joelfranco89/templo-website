@@ -4,9 +4,19 @@ var express = require("express"),
 
 //Route to user profile
 app.get("/profile/:id", function(req, res){
+
+  
   User.findById(req.params.id, function(err, user){
     if (err){
       res.send("User could not be located");
+    }else if (typeof req.user != "undefined" && user.profile.isHidden && req.user.id == req.params.id){
+      res.render("userprofile.ejs", {user: user});
+    }else if (typeof req.user != "undefined" && user.profile.isHidden){
+      req.flash("success", "User has hidden their profile")
+      res.redirect("back");
+    }else if (typeof req.user == "undefined" && user.profile.isHidden){
+      req.flash("success", "User has hidden their profile")
+      res.redirect("back");
     }else{
       res.render("userprofile.ejs", {user: user})
     }
@@ -26,6 +36,32 @@ app.post("/changeemail/:id", function(req, res){
         res.redirect("/profile/" + req.params.id);
       }
     });
+});
+
+//Hide profile 
+app.post("/hideprofile/:id", function(req, res){
+  User.findById(req.params.id, function(err, user){
+    if (err){
+      res.send(err);
+    }else{
+      user.profile.isHidden = true;
+      user.save();
+      res.redirect("/profile/" + req.params.id)
+    }
+  })
+});
+
+//UnHide profile 
+app.post("/unhideprofile/:id", function(req, res){
+  User.findById(req.params.id, function(err, user){
+    if (err){
+      res.send(err);
+    }else{
+      user.profile.isHidden = false;
+      user.save();
+      res.redirect("/profile/" + req.params.id);
+    }
+  })
 });
 
 module.exports = app;

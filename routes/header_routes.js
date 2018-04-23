@@ -47,9 +47,9 @@ app.post("/newquestion", function(req, res){
                       timeCreated: moment().format('LT'),
                     }
 
-    if (req.body.question.length < 10){
-      req.flash("success", "Question needs to be more than 10 characters");
-      res.redirect("/")
+    if (req.body.question.length < 20){
+      req.flash("success", "Question needs to be longer than 20 characters");
+      res.redirect("back")
     }else{
       Question.create(newQuestion, function(err, newQuestion){
         if (err){

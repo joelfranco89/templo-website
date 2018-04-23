@@ -86,9 +86,10 @@
 				</button>
 				<div class="dropdown-menu">
 					<form class="px-4 py-3" action="/newquestion" method="POST">
-							<textarea name="question" maxlength="200"></textarea>
+							<textarea id="newQuestionInput" name="question" maxlength="200"></textarea>
+							<footer id="newquestionCharacters" class="blockquote-footer text-left">0</footer>
 						<div class="dropdown-divider"></div>
-						<button type="submit" class="btn btn-primary">Submit</button>
+						<button id="newQuestionButton" type="submit" class="btn btn-primary" disabled>Submit</button>
 					</form>
 				</div>
 			</div>
@@ -96,9 +97,43 @@
 
 
 			<form class="form-inline my-2 my-lg-0" action="/questionsearch" method="POST">
-				<input name="searchInput" class="form-control mr-sm-2" type="text" placeholder="Search Templo" aria-label="Search">
-				<button class="btn btn-sm btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
+				<input name="searchInput" id="searchInput" class="form-control mr-sm-2" type="text" placeholder="Search Templo" aria-label="Search" maxlength="100">
+				<button id="searchButton" class="btn btn-sm btn-outline-danger my-2 my-sm-0" type="submit" disabled>Search</button>
 			</form>
 		</div>
 	</nav> 
+
+	<script>
+		$(document).ready(function() {
+
+			$("#searchInput").on("keyup", function(){
+				if ($("#searchInput").val().length > 5){
+					$("#searchButton").removeAttr("disabled");
+				}else{
+					$("#searchButton").attr("disabled", true);
+				}				
+			})
+
+			$("#newQuestionInput").on("keyup", function(){
+				if ($("#newQuestionInput").val().length > 20){
+					$("#newQuestionButton").removeAttr("disabled");
+				}else{
+					$("#newQuestionButton").attr("disabled", true);
+				}				
+			})
+
+			$("#newQuestionInput").on("keyup", function(){
+				$("#newquestionCharacters").text($("#newQuestionInput").val().length)
+
+				if ($(this).val().length < 21){
+					$("#newquestionCharacters").css("color", "red")
+				}else{
+					$("#newquestionCharacters").css("color", "green")
+				}
+						
+				
+			})
+
+		});
+	</script>
 	

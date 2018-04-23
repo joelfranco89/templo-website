@@ -3,7 +3,8 @@ var express = require("express"),
     passport = require("passport"),
     localStrategy = require("passport-local"),
     flash = require("connect-flash"),
-    User = require("../models/user_schema.js")
+    User = require("../models/user_schema.js"),
+    nodemailer = require("nodemailer")
 
 // Posting new user 
 app.post("/signup", function(req, res){  
@@ -20,12 +21,42 @@ app.post("/signup", function(req, res){
         User.register(newUser, req.body.password, function(err, user){
           if (err){
             console.log(err.message)
-            return res.render("signup.ejs", {message: err.message})
-          }
-          passport.authenticate("local")(req, res, function(){
-            res.redirect("/");
-          });
+            res.render("signup.ejs", {message: err.message})
+          }else{
           user.save(user.email = req.body.email);
+          user.save(user.isActive = false)
+          user.save(user.validationHash = Math.floor(Math.random() * 100000) + 1)
+          req.flash("success", "An email has been sent to " + req.body.email + " to verify your account")
+          res.redirect("/signup")     
+
+          //Verification email
+          var transporter = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+              user: 'francstudiosinc@gmail.com',
+              pass: 'player73189'
+            }
+          });
+          
+          var mailOptions = {
+            from: 'francstudiosinc@gmail.com',
+            to: req.body.email,
+            subject: 'Verify your Templo account',
+            text: 'Welcome to Templo!\n\n' +
+                  'We wish you a wonderful experience while exploring all Templo has to offer.\n\n' +
+                  'Please verify your Templo account by clicking on the link below.\n\n' +
+                  'http://' + req.headers.host + '/verify/' + user.validationHash               
+          };
+          
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email sent: ' + info.response);
+            }
+          });
+          }
+
         }); 
       }
     });

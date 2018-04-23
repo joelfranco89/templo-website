@@ -22,18 +22,19 @@
       <!-- Empty div -->
     </div>
     <div class="col-lg-4">
-        <%if (currentUser && currentUser.username == user.username){ %>
-          <button id="changeEmail" class="btn btn-sm btn-primary">Change email address</button>
-          <form id="changeEmailInput" action="/changeemail/<%=user._id%>" method="POST">
-              <div class="input-group input-group-sm mb-3">
-                <input type="email" name="email" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value="<%=user.email%>">
-                <div class="input-group-prepend">
-                    <button  type="submit" class="btn btn-outline-secondary" type="button">Submit</button>
-                    <button  id="changeEmailCancel" class="btn btn-outline-secondary" type="button">Cancel</button>
-                </div>
-              </div>
-          </form>
+        <% if (currentUser && currentUser.username == user.username){ %>        
+          <% if (!currentUser.profile.isHidden){ %>          
+            <form action="/hideprofile/<%=user._id%>" method="POST">
+              <button type="submit" id="hideProfile" class="btn btn-sm btn-primary">Hide Profile</button>
+            </form>
+          <% } else if (currentUser.profile.isHidden){ %>
+            <form action="/unhideprofile/<%=user._id%>" method="POST">
+              <button type="submit" id="hideProfile" class="btn btn-sm btn-primary">Unhide Profile</button>
+            </form>
+          <% } %>
+          
         <% } %>
+        
     </div>
   </div>
 
@@ -103,11 +104,13 @@ $(document).ready(function() {
     $("#changeEmail").on("click", function(){
       $("#changeEmail").hide();
       $("#changeEmailInput").show();
+      $("#hideProfile").hide();
     });
 
     $("#changeEmailCancel").on("click", function(){
       $("#changeEmailInput").hide();
       $("#changeEmail").show();
+      $("#hideProfile").show();
     });
   
 });

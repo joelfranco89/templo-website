@@ -9,6 +9,8 @@ var Question = require("../models/question_schema.js"),
 
 //Route to main page
 app.get("/", function(req, res){
+
+
   var quotesArray = []
 
   MotivationalQuote.find(function(err, quote){

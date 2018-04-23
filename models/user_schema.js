@@ -10,7 +10,12 @@ var UserSchema = new mongoose.Schema({
   questions: [],
   answers: [],
   followedQuestions: [],
-  isAdmin: Boolean
+  isAdmin: Boolean,
+  profile: {
+    isHidden: Boolean
+  },
+  isActive: Boolean,
+  validationHash: Number
 });
 
 UserSchema.plugin(passportLocalMongoose);

@@ -25,8 +25,12 @@ var homeRoutes = require("./routes/home_routes.js"),
 
 
 // Connect application to a mongoDB database
-//mongoose.connect("mongodb://localhost/medicalProject");
-mongoose.connect("mongodb://joelfranco:Player73189!@ds131329.mlab.com:31329/templo");
+var url = process.env.DATABASEURL || "mongodb://joelfranco:Player73189!@ds149309.mlab.com:49309/templo_testing_database"
+// mongoose.connect("mongodb://localhost/medicalProject");
+mongoose.connect(url);
+
+
+
 
 // set express to use body-parser to parse objects
 app.use(bodyParser.urlencoded({extended: true}));

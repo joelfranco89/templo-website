@@ -11,7 +11,9 @@ var questionSchema = new mongoose.Schema({
   dateCreated: String,
   timeCreated: String,
   answers: [],
-  userEmailsArray: []
+  userEmailsArray: [],
+  usersMarkedHelpful: [],
+  usersMarkedUnhelpful: []
 });
 
 

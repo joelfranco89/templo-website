@@ -1,19 +1,24 @@
 <%include header.ejs%>
 
-<link href="css/signup.css" rel="stylesheet">
 
 
 
-  <div class="container border" style="margin-top: 20%">
+
+  <div class="container" style="margin-top: 5rem">
+      <div class="jumbotron">
+          <em class="lead quote-font" id="quotes"></em>
+          <footer class="blockquote-footer" id="author"></footer>
+      </div>
     <div class="container text-center">
+        <% include betaMessage.ejs %>
       <%if (message && message.length > 0){%>
         <div class="alert alert-info">
         <%=message%>
         </div>
       <%}%>
-      <h1>
+      <h4>
         Sign up and join the community
-      </h1>
+      </h4>
     </div>
     <div class="row" style="margin: 40px;">
       <div class="col-md-12">
@@ -39,4 +44,55 @@
       </div>
     </div>
   </div>
+
+
+  <style>
+      @media only screen and (max-width: 760px) {
+          .jumbotron{
+              height: 250px;
+          }
+      }
+  
+      @media only screen and (min-width: 761px) {
+          .jumbotron{
+              height: 200px;
+          }
+      }
+      
+      
+  </style>
+
+  
+
+  <script>
+      $(document).ready(function(){
+      
+      $.get( "https://api.mlab.com/api/1/databases/templo/collections/motivationalquotes?apiKey=zJZdthm4HNnURfvKlosWFVCMyAkSjF88", function(quotes) {
+        
+    
+     var initialQuote =  Math.floor((Math.random() * (quotes.length)));
+     $("#quotes").html(quotes[initialQuote].quote); 
+     $("#author").html(quotes[initialQuote].author);
+     
+        
+      function newQuote(){
+          i = Math.floor((Math.random() * (quotes.length)));
+          $("#quotes").fadeOut(2000, function(){
+            $("#quotes").fadeIn(2000)
+            $("#quotes").html(quotes[i].quote);
+          });
+          $("#author").fadeOut(2000, function(){
+            $("#author").fadeIn(2000)
+            $("#author").html(quotes[i].author);
+          });
+          
+        }
+  
+        setInterval(newQuote, 20000);
+      });
+  
+  
+      
+    })
+  </script>
 <%include footer.ejs%>

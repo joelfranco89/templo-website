@@ -42,14 +42,18 @@
     </form>
       <% for (i = 0; i < quotes.length; i++){ %>
         <div class="row">
-          <div class="col-lg-10">      
+          <div class="col-lg-12">      
               <ul class="list-group">        
                        <li class="list-group-item"><strong><%=quotes[i].quote%></strong> 
                         <br>
                         <p>Author - <em><%=quotes[i].author%></em></p>
-                        </li>
+                        <form action="/admin/deletequote/<%=quotes[i]._id%>?_method=DELETE" method="POST">
+                        <button type="submit" class="btn btn-primary float-right">Delete</button>  
+                        </form>  
+                        </li>          
               </ul>
           </div>
+
         </div>
       <% } %>
     </div>

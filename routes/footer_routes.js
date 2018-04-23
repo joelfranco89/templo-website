@@ -20,7 +20,8 @@ app.post("/contact", function(req, res){
         to: "francstudiosinc@gmail.com",
         from: req.body.email,
         subject: 'Message from ' + req.body.firstName + " " + req.body.lastName,
-        text: req.body.message
+        text: req.body.message + "\n\n" +
+              "User email: " + req.body.email
       };
       smtpTransport.sendMail(mailOptions, function(err) {
         console.log('mail sent');
