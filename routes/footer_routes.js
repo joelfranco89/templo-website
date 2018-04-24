@@ -17,9 +17,9 @@ app.post("/contact", function(req, res){
         }
       });
       var mailOptions = {
-        to: "support@templousa.com",
+        to: "joelfranco@templousa.com",
         from: req.body.email,
-        subject: 'Message from ' + req.body.firstName + " " + req.body.lastName,
+        subject: 'Message from ' + req.body.firstName + " " + req.body.lastName + " at the contact page",
         text: req.body.message + "\n\n" +
               "User email: " + req.body.email
       };
