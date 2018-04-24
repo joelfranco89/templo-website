@@ -96,8 +96,8 @@ app.post("/question/:id/answer", function(req, res){
     if (err){
       res.send(err);
     }else{
-      if (req.body.answer.length < 20){
-        req.flash("success", "Answer needs to be longer than 20 characters");
+      if (req.body.answer.length < 11){
+        req.flash("success", "Answer needs to be longer than 10 characters");
         res.redirect("back");
       }else{
         Answer.create(newAnswer, function(err, newAnswer){
@@ -120,13 +120,13 @@ app.post("/question/:id/answer", function(req, res){
       var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-          user: 'francstudiosinc@gmail.com',
-          pass: 'player73189'
+          user: 'joelfranco@templousa.com',
+          pass: process.env.EMAILPASSWORD
         }
       });
       
       var mailOptions = {
-        from: 'francstudiosinc@gmail.com',
+        from: 'support@templousa.com',
         to: email,
         subject: 'Message from the Templo team',
         text: 'There is a new answer on the below question that you are following: \n\n' +
@@ -226,7 +226,7 @@ app.post("/followquestion/:id", function(req, res){
     if (err){
       res.send(err);
     }else{
-    req.flash('success', 'You are now following this question. When someone answers this question, you will be alerted at ' + req.user.email + '. If this is not your email, you can change it on your user profile.')
+    req.flash('success', 'You are now following this question. When someone answers this question, you will be alerted at ' + req.user.email)
     question.userEmailsArray.unshift(req.user.email);
     req.user.followedQuestions.unshift(question)
     req.user.save();

@@ -1,5 +1,11 @@
 <% include header.ejs %>
-<div class="container" style="margin-top: 15%">
+<div class="container" style="margin-top: 5rem">
+
+    <div class="jumbotron">
+        <em class="lead quote-font" id="quotes"></em>
+        <footer class="blockquote-footer" id="author"></footer>
+    </div>
+    
   <div class="row">
     <div class="col-lg-12">
       <%if (message && message.length > 0){%>
@@ -112,6 +118,30 @@ $(document).ready(function() {
       $("#changeEmail").show();
       $("#hideProfile").show();
     });
+
+    $.get( "https://api.mlab.com/api/1/databases/templo/collections/motivationalquotes?apiKey=zJZdthm4HNnURfvKlosWFVCMyAkSjF88", function(quotes) {
+      
+  
+      var initialQuote =  Math.floor((Math.random() * (quotes.length)));
+      $("#quotes").html(quotes[initialQuote].quote); 
+      $("#author").html(quotes[initialQuote].author);
+      
+         
+       function newQuote(){
+           i = Math.floor((Math.random() * (quotes.length)));
+           $("#quotes").fadeOut(2000, function(){
+             $("#quotes").fadeIn(2000)
+             $("#quotes").html(quotes[i].quote);
+           });
+           $("#author").fadeOut(2000, function(){
+             $("#author").fadeIn(2000)
+             $("#author").html(quotes[i].author);
+           });
+           
+         }
+   
+         setInterval(newQuote, 20000);
+      });
   
 });
 </script>

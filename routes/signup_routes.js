@@ -33,13 +33,13 @@ app.post("/signup", function(req, res){
           var transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
-              user: 'francstudiosinc@gmail.com',
-              pass: 'player73189'
+              user: 'joelfranco@templousa.com',
+              pass: process.env.EMAILPASSWORD
             }
           });
           
           var mailOptions = {
-            from: 'francstudiosinc@gmail.com',
+            from: 'support@templousa.com',
             to: req.body.email,
             subject: 'Verify your Templo account',
             text: 'Welcome to Templo!\n\n' +

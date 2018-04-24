@@ -107,13 +107,13 @@ var express = require("express"),
             var smtpTransport = nodemailer.createTransport({
               service: 'Gmail', 
               auth: {
-                user: 'francstudiosinc@gmail.com',
-                pass: 'player73189'
+                user: 'joelfranco@templousa.com',
+                pass: process.env.EMAILPASSWORD
               }
             });
             var mailOptions = {
               to: user.email,
-              from: 'francstudiosinc@gmail.com',
+              from: 'support@templousa.com',
               subject: 'Your password has been changed',
               text: 'Hello,\n\n' +
                 'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'

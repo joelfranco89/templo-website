@@ -12,12 +12,12 @@ app.post("/contact", function(req, res){
     var smtpTransport = nodemailer.createTransport({
         service: 'Gmail', 
         auth: {
-          user: 'francstudiosinc@gmail.com',
-          pass: "player73189"
+          user: 'joelfranco@templousa.com',
+          pass: process.env.EMAILPASSWORD
         }
       });
       var mailOptions = {
-        to: "francstudiosinc@gmail.com",
+        to: "support@templousa.com",
         from: req.body.email,
         subject: 'Message from ' + req.body.firstName + " " + req.body.lastName,
         text: req.body.message + "\n\n" +
