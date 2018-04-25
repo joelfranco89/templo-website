@@ -241,8 +241,8 @@
       <div class="col-md-12">
         <ul class="list-group text-left">
           <% question.answers.forEach(function(answer){ %>
-            <li class="list-group-item">
-              <p><%= answer.answer %></p>
+            <li class="list-group-item">          
+              <p><%-answer.answer.replace(/\n/g, "<br>")%></p>
               <% if (typeof currentUser !== "undefined" && currentUser._id == answer.authorId || currentUser && currentUser.isAdmin){ %>  
                 <form action="/deleteanswer/<%=answer._id%>/question/<%=answer.questionId%>?_method=DELETE" method="POST">
                   <button type="submit" class="btn btn-sm btn-outline-danger float-right">Delete</button>
@@ -275,6 +275,11 @@
     }
   }
 
+  textarea {
+  resize: none;
+  white-space: pre-wrap;
+}
+
 </style>
 
  
@@ -302,8 +307,7 @@ $( document ).ready(function() {
         }else{
           $("#newAnswerCharacters").css("color", "green")
         }	
-      })   
-
+      });
 
 });
 </script>

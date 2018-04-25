@@ -3,16 +3,15 @@
 
 
 
-
-
     <!-- Copyright-->
 
       <div class="footer-copyright py-3 fixed-bottom">
         <div class="row">
           <div class="text-center col-12">
+              <span><a href="https://www.facebook.com/templousa/"><i class="fab fa-facebook-square float-left text-white left-button" style="font-size: 24px"></i></a></span>
               Copyright © Templo 2018             
-                <span class="float-right"><a href="/contactpage"><p class="text-white">Contact</p></a></span>
-                <span class="float-right"><a href="/aboutpage"><p class="text-white">About</p></a></span>
+                <span class="float-right right-buttons"><a href="/contactpage"><p class="text-white">Contact</p></a></span>
+                <span class="float-right right-buttons"><a href="/aboutpage"><p class="text-white">About</p></a></span>
           </div>
         </div>
       </div>
@@ -28,13 +27,32 @@
     color: white;
   }
 
-  span{
-    padding-right: 20px;
-  }
-
   p{
     margin-bottom: 0;
   }
+
+  @media only screen and (max-width: 375px) {
+    .right-buttons{
+      margin-right: 10px;
+    }
+
+    .left-button{
+      margin-left: 10px;
+    }
+    
+    
+  }
+
+  @media only screen and (min-width: 376px) {
+    .right-buttons{
+      margin-right: 10px;
+    }
+
+    .left-button{
+      margin-left: 10px;
+    }
+  }
+  
 
 </style>
 
