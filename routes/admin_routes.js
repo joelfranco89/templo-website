@@ -4,7 +4,8 @@ var express = require("express"),
     User = require("../models/user_schema.js"),
     Question = require("../models/question_schema.js"),
     Answer = require("../models/answer_schema.js"),
-    MotivationalQuotes = require("../models/motivational_quotes.js")
+    MotivationalQuotes = require("../models/motivational_quotes.js"),
+    moment = require("moment")
 
     // Route to admin question page
     app.get("/admin/questions", function(req, res){
@@ -15,7 +16,13 @@ var express = require("express"),
                 if (err){
                     res.send(err);
                 }else{
-                    res.render("adminQuestionPage.ejs", {questions: questions});
+                    questionsOfTheDay = []
+                    questions.forEach(function(question){
+                        if (question.dateCreated == moment().format('MMM Do YYYY')){
+                            questionsOfTheDay.unshift(question)
+                        }
+                    });
+                    res.render("adminQuestionPage.ejs", {questions: questionsOfTheDay});
                 } 
             });
         }

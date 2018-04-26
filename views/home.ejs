@@ -40,23 +40,19 @@
       
 
 
-          <% var sortedQuestionsArray = questions.sort(function(a, b){ %>
-          <% return b.views-a.views; %>
-          <% }) %>
-
           <div class="list-group">
           <% for (i = 0; i < 35; i++) { %>        
-            <a href="/question/<%= sortedQuestionsArray[i]._id %>" class="list-group-item list-group-item-action">
+            <a href="/question/<%= questions[i]._id %>" class="list-group-item list-group-item-action">
               <div class="row"> 
                 <div class="col-md-6">       
-                  <p><strong><%= sortedQuestionsArray[i].question.charAt(0).toUpperCase() + sortedQuestionsArray[i].question.slice(1) %></strong></p>
+                  <p><strong><%= questions[i].question.charAt(0).toUpperCase() + questions[i].question.slice(1) %></strong></p>
                 </div>           
            <div class="col-md-6 icons">     
            <div class="row">
             <div class="col-sm-3">
               <div class="row">
                 <div class="col-sm-12 ">
-                  <div class="badge"><%= sortedQuestionsArray[i].answers.length %></div>
+                  <div class="badge"><%= questions[i].answers.length %></div>
                 </div>
                 <div class="col-sm-12">
                   answered
@@ -66,7 +62,7 @@
             <div class="col-sm-3">
               <div class="row">
                 <div class="col-sm-12 ">
-                  <div class="badge"><%= sortedQuestionsArray[i].views %></div>
+                  <div class="badge"><%= questions[i].views %></div>
                 </div>
                 <div class="col-sm-12">
                   views
@@ -76,7 +72,7 @@
             <div class="col-sm-3">
               <div class="row">
                 <div class="col-sm-12 ">
-                  <div class="badge"><%= sortedQuestionsArray[i].helpful %></div>
+                  <div class="badge"><%= questions[i].helpful %></div>
                 </div>
                 <div class="col-sm-12">
                   <div><i class="far fa-thumbs-up"></i></div>
@@ -86,7 +82,7 @@
             <div class="col-sm-3">
               <div class="row">
                 <div class="col-sm-12 ">
-                  <div class="badge"><%= sortedQuestionsArray[i].notHelpful %></div>
+                  <div class="badge"><%= questions[i].notHelpful %></div>
                 </div>
                 <div class="col-sm-12">
                   <div><i class="far fa-thumbs-down"></i></div>

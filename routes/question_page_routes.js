@@ -85,12 +85,13 @@ app.delete('/admindeleteanswer/:id/question/:question_id', function(req, res){
 
 
 
-//Route to post answer to question
+//Route to post new answer to question
 app.post("/question/:id/answer", function(req, res){
   var newAnswer = {
                      answer: req.body.answer, 
                      questionId: req.params.id,
-                     offensive: false
+                     offensive: false,
+                     dateCreated: Date.now()
                   }
   Question.findById(req.params.id, function(err, question){
     if (err){
