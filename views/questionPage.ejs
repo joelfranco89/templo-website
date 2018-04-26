@@ -177,14 +177,14 @@
 
       <% if ( currentUser && isFollowing){ %>
         <form action="/unfollowquestion/<%=question._id%>" method="POST">
-          <button class="btn btn-sm btn-dark">Unfollow Question</button>
+          <button class="btn btn-sm btn-dark">Unfollow Question <%=question.userEmailsArray.length%></button>
         </form>
       <% } %>
 
 
       <% if ( currentUser && !isFollowing){ %>
         <form action="/followquestion/<%=question._id%>" method="POST">
-          <button class="btn btn-sm btn-dark">Follow Question</button>
+          <button class="btn btn-sm btn-dark">Follow Question <%=question.userEmailsArray.length%></button>
         </form>
       <% } %>
       
@@ -193,7 +193,7 @@
       <%if (!currentUser){ %>
         <div class="float-left"  data-toggle="tooltip" title="You need to be signed in">  
             <button class="btn btn-dark btn-sm" style="pointer-events: none;" disabled>
-              Follow Question
+              Follow Question <%=question.userEmailsArray.length%>
             </button>        
         </div>
       <% } %>
