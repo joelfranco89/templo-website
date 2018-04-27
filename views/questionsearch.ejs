@@ -162,6 +162,7 @@
         <% }) %>
         <% for (i = 0; i < searchArray.length; i++){ %>
         <a href="/<%= sortedAnsweredArray[i]._id %>"><p class="text-dark"><%= sortedAnsweredArray[i].question.charAt(0).toUpperCase() + sortedAnsweredArray[i].question.slice(1)%></p></a>
+        <br>
         <% } %>
       </div>
       
@@ -175,6 +176,7 @@
         <% }) %>
         <% for (i = 0; i < searchArray.length; i++){ %>
           <a href="/<%= sortedViewsArray[i]._id %>"><p class="text-dark"><%= sortedViewsArray[i].question.charAt(0).toUpperCase() + sortedViewsArray[i].question.slice(1)%></p></a>
+          <br>
         <% } %>
       </div>
       
@@ -189,6 +191,7 @@
         <% }) %>
         <% for (i = 0; i < searchArray.length; i++){ %>
         <a href="/<%= sortedHelpfulArray[i]._id %>"><p class="text-dark"><%= sortedHelpfulArray[i].question.charAt(0).toUpperCase() + sortedHelpfulArray[i].question.slice(1)%></p></a>
+        <br>
         <% } %>
       </div>
       
@@ -204,6 +207,7 @@
         <% }) %>
         <% for (i = 0; i < searchArray.length; i++){ %>
         <a href="/<%= sortedNotHelpfulArray[i]._id %>"><p class="text-dark"><%= sortedNotHelpfulArray[i].question.charAt(0).toUpperCase() + sortedNotHelpfulArray[i].question.slice(1)%></p></a>
+        <br>
         <% } %>
       </div>
       
