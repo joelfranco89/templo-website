@@ -227,7 +227,7 @@ app.post("/followquestion/:id", function(req, res){
     if (err){
       res.send(err);
     }else{
-    req.flash('success', 'You are now following this question. When someone answers this question, you will be alerted at ' + req.user.email)
+    req.flash('success', 'You are now following this question. When a new answer is posted, you will be alerted at ' + req.user.email)
     question.userEmailsArray.unshift(req.user.email);
     req.user.followedQuestions.unshift(question)
     req.user.save();

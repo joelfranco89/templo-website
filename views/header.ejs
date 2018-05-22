@@ -46,20 +46,19 @@
 			font-family: 'Times New Roman', Times, serif
 		}
 
-		body{
-			height: 100%;
-			margin: 0 ;
-			padding: 0;
-		}	
 
-		html{
-			height: 100%;
+		a{
+			cursor: pointer;
+			text-decoration: none;
+		}
+		button{
+			text-decoration: none;
 		}
 
 	</style>
 	
 
-	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		
 		
 		<a class="navbar-brand text-danger" href="/" id="temploLogo">TEMPLO <span id="betaLogo">beta</span></a>
@@ -97,11 +96,11 @@
 			<% } %>
 			
 
-			<div class="btn-group" style="margin-right: 5px;">
+			<!-- <div class="btn-group" style="margin-right: 5px;"> -->
 				<% if (currentUser && currentUser.isAdmin){ %>
 					<a href="/admin/questions"><button class="btn btn-warning">Admin</button></a>
 				<%}%>	
-				<button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<!-- <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					Ask a new question
 				</button>
 				<div class="dropdown-menu">
@@ -113,7 +112,7 @@
 					</form>
 				</div>
 			</div>
-
+ -->
 
 
 			<form class="form-inline my-2 my-lg-0" action="/questionsearch" method="POST">
@@ -122,6 +121,41 @@
 			</form>
 		</div>
 	</nav> 
+
+
+
+    <div class=" jumbotron jumbotron-signed-in text-center text-white bg-danger p-2" >
+      <!-- <div class="quotesDiv " >
+        <em class="lead quote-font" id="quotes"></em>
+        <footer class="blockquote-footer text-white" id="author"></footer>  
+	  </div> -->
+	  <p class="font-weight-bold mt-4" style="font-size: 20px;">Ask. Get Answers. Simple.</p>
+
+      <form action="/newquestion" method="POST" class="form-inline justify-content-center mb-4">
+          <div class="form-group mx-sm-3 mb-0">
+            <input type="text" name="question" class="form-control" id="inputPassword2" placeholder="Ask a question....">
+          </div>
+          <button type="submit" class="btn btn-light">Ask</button>
+        </form>
+	</div>
+
+	<style>
+		@media only screen and (min-width: 375px){
+			.quotesDiv{
+				height: 160px;
+			}
+		} 
+		@media only screen and (min-width: 768px){
+			.quotesDiv{
+				height: 100px;
+			}
+		}
+
+	</style>
+	
+
+
+
 
 	<script>
 		$(document).ready(function() {
@@ -153,6 +187,30 @@
 						
 				
 			})
+
+    $.get( "https://api.mlab.com/api/1/databases/templo/collections/motivationalquotes?apiKey=zJZdthm4HNnURfvKlosWFVCMyAkSjF88", function(quotes) {
+      
+  
+	  var initialQuote =  Math.floor((Math.random() * (quotes.length)));
+	  $("#quotes").html(quotes[initialQuote].quote); 
+	  $("#author").html(quotes[initialQuote].author);
+	  
+		 
+	   function newQuote(){
+		   i = Math.floor((Math.random() * (quotes.length)));
+		   $("#quotes").fadeOut(2000, function(){
+			 $("#quotes").fadeIn(2000)
+			 $("#quotes").html(quotes[i].quote);
+		   });
+		   $("#author").fadeOut(2000, function(){
+			 $("#author").fadeIn(2000)
+			 $("#author").html(quotes[i].author);
+		   });
+		   
+		 }
+   
+		 setInterval(newQuote, 20000);
+	   });
 
 		});
 	</script>

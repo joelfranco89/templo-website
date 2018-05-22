@@ -4,113 +4,54 @@
 
 
 
-<div class="container">
+ 
 
-  <% if (!currentUser){ %>
-    <div class=" jumbotron jumbotron-signed-in" style="margin-top: 5rem">
-      <p class="lead"><em><strong>Join the growing community of people sharing their physical and mental pain &nbsp</strong></em>
-        <a href="/aboutpage"><button class="btn btn-danger btn-sm">About us</button></a>     
-      </p>
-      <div class="quotesDiv">
-        <em class="lead quote-font" id="quotes"></em>
-        <footer class="blockquote-footer" id="author"></footer>
-      </div>
-    </div>
-  <% }else{ %>
-    <div class=" jumbotron jumbotron-signed-in" style="margin-top: 5rem">
-      <p class="lead"><em><strong>What are your symptons? Finally find answers from people with the same issues from around the world!</strong></em></p>
-      <div class="quotesDiv">
-        <em class="lead quote-font" id="quotes"></em>
-        <footer class="blockquote-footer" id="author"></footer>
-      </div>
-    </div>  
-    
-  <% } %>
-
-  <% include betaMessage.ejs %>
   <%if (message && message.length > 0){%>
     <div class="alert alert-info">
       <%=message%>
     </div>
   <%}%>  
 
-  <div class="row">
+  <div class="container">
 
-    <div class="col-lg-9">  
+  <div class="row">
+      
+    <div class="col-sm-12 col-md-9">  
+
+      <div class="row">
+          <% for (i = 0; i < 40; i++) { %>       
+            
+
+              <div class="col-sm-12 mb-1">
+                <div class="card">
+                  <div class="card-header">
+                     <a href="/question/<%=questions[i].id%>" class="text-dark"> <%= questions[i].question.charAt(0).toUpperCase() + questions[i].question.slice(1) %></a>
+                  </div>
+                  <div class="card-body pb-0" style="font-size: 13px;">
+                   <p><%=questions[i].answers.length%> answers&nbsp; <span><%=questions[i].views%> views &nbsp;<i class="far fa-thumbs-up"></i>&nbsp;<%= questions[i].helpful %>&nbsp;&nbsp;<i class="far fa-thumbs-down"></i>&nbsp;<%= questions[i].notHelpful %></span></p> 
+                   <p></p>
+                  </div>
+                </div>
+              </div>
+ 
+              <% } %>
+            </div>
+    </div>
+  
+
+          
       
 
 
-          <div class="list-group">
-          <% for (i = 0; i < 35; i++) { %>        
-            <a href="/question/<%= questions[i]._id %>" class="list-group-item list-group-item-action">
-              <div class="row"> 
-                <div class="col-md-6">       
-                  <p><strong><%= questions[i].question.charAt(0).toUpperCase() + questions[i].question.slice(1) %></strong></p>
-                </div>           
-           <div class="col-md-6 icons">     
-           <div class="row">
-            <div class="col-sm-3">
-              <div class="row">
-                <div class="col-sm-12 ">
-                  <div class="badge"><%= questions[i].answers.length %></div>
-                </div>
-                <div class="col-sm-12">
-                  answered
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="row">
-                <div class="col-sm-12 ">
-                  <div class="badge"><%= questions[i].views %></div>
-                </div>
-                <div class="col-sm-12">
-                  views
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="row">
-                <div class="col-sm-12 ">
-                  <div class="badge"><%= questions[i].helpful %></div>
-                </div>
-                <div class="col-sm-12">
-                  <div><i class="far fa-thumbs-up"></i></div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="row">
-                <div class="col-sm-12 ">
-                  <div class="badge"><%= questions[i].notHelpful %></div>
-                </div>
-                <div class="col-sm-12">
-                  <div><i class="far fa-thumbs-down"></i></div>
-                </div>
-              </div>
-            </div>
-           </div>           
-           </div>
-           </div>
-            </a>
-          
-      <% } %>
-      </div> <!-- List group ends -->
-      <br>
-    </div>
-    
-    
-    
-    
-    <div class="col-lg-3"> 
+    <div class="col-sm-12 col-md-3 "> 
       <div class="list-group-item">
         <h6>Most Answered Questions</h6>
         <hr>
         <% var sortedAnsweredArray = questions.sort(function(a, b){ %>
-        <% return b.answerCount-a.answerCount; %>
+        <% return b.answers.length-a.answers.length; %>
         <% }) %>
         <% for (i = 0; i < 5; i++){ %>
-        <a href="/question/<%= sortedAnsweredArray[i]._id %>"><p class="text-dark"><%= sortedAnsweredArray[i].question.charAt(0).toUpperCase() + sortedAnsweredArray[i].question.slice(1)%></p></a>
+        <a href="/question/<%= sortedAnsweredArray[i]._id %>"><p class="text-dark mb-0"><%= sortedAnsweredArray[i].question.charAt(0).toUpperCase() + sortedAnsweredArray[i].question.slice(1)%></p></a>
         <br>
         <% } %>
       </div>
@@ -124,7 +65,7 @@
         <% return b.views-a.views; %>
         <% }) %>
         <% for (i = 0; i < 5; i++){ %>
-          <a href="/question/<%= sortedViewsArray[i]._id %>"><p class="text-dark"><%= sortedViewsArray[i].question.charAt(0).toUpperCase() + sortedViewsArray[i].question.slice(1)%></p></a>
+          <a href="/question/<%= sortedViewsArray[i]._id %>"><p class="text-dark mb-0"><%= sortedViewsArray[i].question.charAt(0).toUpperCase() + sortedViewsArray[i].question.slice(1)%></p></a>
           <br>
         <% } %>
       </div>
@@ -133,29 +74,30 @@
       
       
       <div class="list-group-item">
-        <h6>Most helpful</h6>
+        <h6>Most Helpful</h6>
         <hr>
         <% var sortedHelpfulArray = questions.sort(function(a, b){ %>
         <% return b.helpful-a.helpful; %>
         <% }) %>
         <% for (i = 0; i < 5; i++){ %>
-        <a href="/question/<%= sortedHelpfulArray[i]._id %>"><p class="text-dark"><%= sortedHelpfulArray[i].question.charAt(0).toUpperCase() + sortedHelpfulArray[i].question.slice(1)%></p></a>
+        <a href="/question/<%= sortedHelpfulArray[i]._id %>"><p class="text-dark mb-0"><%= sortedHelpfulArray[i].question.charAt(0).toUpperCase() + sortedHelpfulArray[i].question.slice(1)%></p></a>
         <br>
         <% } %>
       </div>
+
       
       
       <br>  
       
       
       <div class="list-group-item">
-        <h6>Least helpful</h6>
+        <h6>Least Helpful</h6>
         <hr>
         <% var sortedNotHelpfulArray = questions.sort(function(a, b){ %>
         <% return b.notHelpful-a.notHelpful; %>
         <% }) %>
         <% for (i = 0; i < 5; i++){ %>
-        <a href="/question/<%= sortedNotHelpfulArray[i]._id %>"><p class="text-dark"><%= sortedNotHelpfulArray[i].question.charAt(0).toUpperCase() + sortedNotHelpfulArray[i].question.slice(1)%></p></a>
+        <a href="/question/<%= sortedNotHelpfulArray[i]._id %>"><p class="text-dark mb-0"><%= sortedNotHelpfulArray[i].question.charAt(0).toUpperCase() + sortedNotHelpfulArray[i].question.slice(1)%></p></a>
         <br>
         <% } %>
       </div>
@@ -163,58 +105,26 @@
       
       <br>
       
-      
+      </div>
     </div>
+
   </div>
 
-</div>
 
 <style>
-  @media only screen and (max-width: 760px) {
-    .icons{
-      display: none;
-    }
 
-    em{
-      font-size: 20px;
-    }
-    
-    .jumbotron{
-      height: 335px;
-      position: relative; 
-    }
 
-  .quotesDiv{
-    position: absolute;
-    bottom: 0;
+  @media only screen and (max-width: 760px){
+    .quotesDiv{
+      height: 250px;;
+    }
   }
 
-  }
-
-    @media only screen and (min-width: 761px) {
-
-    em{
-      font-size: 30px;
+    @media only screen and (min-width: 761px){
+    .quotesDiv{
+      height: 100px;;
     }
-
-    footer{
-      font-size: 20px;
-    }
-    
-
-  .jumbotron{
-    height: 280px;
-    position: relative; 
-
-
   }
-
-  .quotesDiv{
-    position: absolute;
-    bottom: 0;
-  }
-  }
-  
 
 
 </style>
@@ -222,29 +132,11 @@
 <script>
   $(document).ready(function(){
     
-    $.get( "https://api.mlab.com/api/1/databases/templo/collections/motivationalquotes?apiKey=zJZdthm4HNnURfvKlosWFVCMyAkSjF88", function(quotes) {
-      
-  
-   var initialQuote =  Math.floor((Math.random() * (quotes.length)));
-   $("#quotes").html(quotes[initialQuote].quote); 
-   $("#author").html(quotes[initialQuote].author);
-   
-      
-    function newQuote(){
-        i = Math.floor((Math.random() * (quotes.length)));
-        $("#quotes").fadeOut(2000, function(){
-          $("#quotes").fadeIn(2000)
-          $("#quotes").html(quotes[i].quote);
-        });
-        $("#author").fadeOut(2000, function(){
-          $("#author").fadeIn(2000)
-          $("#author").html(quotes[i].author);
-        });
-        
-      }
-
-      setInterval(newQuote, 20000);
-    });
+    $(window).scroll(function() {
+    if($(window).scrollTop() == $(document).height() - $(window).height()) {
+           // ajax call get data from server and append to the div
+    }
+});
 
 
     

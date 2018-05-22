@@ -26,7 +26,6 @@ var express = require("express"),
                 } 
             });
         }
-
     });
 
     //Route to admin answer page

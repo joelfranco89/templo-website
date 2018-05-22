@@ -56,27 +56,6 @@
 
 <div class="container">
 
-    <% if (!currentUser){ %>
-      <div class=" jumbotron jumbotron-signed-in" style="margin-top: 5rem">
-        <p class="lead"><em><strong>Join the growing community of people sharing their physical and mental pain</strong></em></p>
-        <div class="quotesDiv">
-          <em class="lead quote-font" id="quotes"></em>
-          <footer class="blockquote-footer" id="author"></footer>
-        </div>
-      </div>
-    <% }else{ %>
-      <div class=" jumbotron jumbotron-signed-in" style="margin-top: 5rem">
-        <p class="lead"><em><strong>What are your symptons? Finally find answers from people with the same issues from around the world!</strong></em></p>
-        <div class="quotesDiv">
-          <em class="lead quote-font" id="quotes"></em>
-          <footer class="blockquote-footer" id="author"></footer>
-        </div>
-      </div>  
-      
-    <% } %>
-
-  <% include betaMessage.ejs %>
-
 <%if (searchArray.length === 0){%>
     <div class="row">
       <div class="col-md-12">

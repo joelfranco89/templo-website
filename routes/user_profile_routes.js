@@ -46,6 +46,7 @@ app.post("/hideprofile/:id", function(req, res){
     }else{
       user.profile.isHidden = true;
       user.save();
+      req.flash("success", "Your profile has been hidden from the public")
       res.redirect("/profile/" + req.params.id)
     }
   })
@@ -59,6 +60,7 @@ app.post("/unhideprofile/:id", function(req, res){
     }else{
       user.profile.isHidden = false;
       user.save();
+      req.flash("success", "Your profile is now public")
       res.redirect("/profile/" + req.params.id);
     }
   })
