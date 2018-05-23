@@ -17,13 +17,13 @@
   
   
       <%if (!currentUser){%>      
-      <div class="float-left mr-1"  data-toggle="tooltip" title="You need to be signed in" >  
-          <button   class="" style="pointer-events: none; font-size: 10px;" disabled>
+      <div class=""  data-toggle="tooltip" title="You need to be signed in" >  
+          <button   class="float-left mr-1" style="pointer-events: none; font-size: 10px;" disabled>
             Helpful &nbsp;<i class="far fa-thumbs-up"></i>&nbsp;<%= question.helpful %>
           </button>        
       </div>
-      <div class="float-left mr-1"  data-toggle="tooltip" title="You need to be signed in">     
-          <button class="" style="pointer-events: none; font-size: 10px;" disabled>
+      <div class=""  data-toggle="tooltip" title="You need to be signed in">     
+          <button class="float-left mr-1" style="pointer-events: none; font-size: 10px;" disabled>
             Not Helpful &nbsp;<i class="far fa-thumbs-down"></i>&nbsp;<%= question.notHelpful %>
           </button>      
       </div>
