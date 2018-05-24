@@ -13,12 +13,6 @@ app.get("/", function(req, res){
 
 
 
-  MotivationalQuote.find(function(err, quote){
-    quote.forEach(function(quote){
-      quotesArray.unshift(quote);
-    });
-  });
-
   Question.find(function(err, questions){
     if (err){
       res.send(err);
