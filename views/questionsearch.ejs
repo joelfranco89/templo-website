@@ -4,54 +4,23 @@
 
 <!-- Creating array from search-->
 <% var searchSplitArray = search.split(' ') %>
+<% var duplicateSearchArray = [] %>
 <% var searchArray = [] %>
 
 <% for (i = 0; i < questions.length; i++){ %>
   <% searchSplitArray.forEach(function(word){ %>
     <% if (questions[i].question.toLowerCase().includes(word.toLowerCase())){ %>
-      <% searchArray.unshift(questions[i]); %>  
+      <% duplicateSearchArray.unshift(questions[i]); %>  
     <% }; %>    
   <% }); %>
 <% }; %>
 
 <!-- Removing duplicate search results -->
-<% for (i = 0; i < searchArray.length; i++){ %>
-    <%if (searchArray[i] == searchArray[i + 1]){ %>
-      <%searchArray.splice(i, 1) %>
-   <% }%>
+<% for (i = 0; i < duplicateSearchArray.length; i++){ %>
+      <% if (searchArray.indexOf(duplicateSearchArray[i]) == -1){ %>
+           <% searchArray.unshift(duplicateSearchArray[i]) %>
+      <% } %>
 <% } %>
-
-<% for (i = 0; i < searchArray.length; i++){ %>
-  <%if (searchArray[i] == searchArray[i + 1]){ %>
-    <%searchArray.splice(i, 1) %>
- <% }%>
-<% } %>
-
-<% for (i = 0; i < searchArray.length; i++){ %>
-  <%if (searchArray[i] == searchArray[i + 1]){ %>
-    <%searchArray.splice(i, 1) %>
- <% }%>
-<% } %>
-
-<% for (i = 0; i < searchArray.length; i++){ %>
-  <%if (searchArray[i] == searchArray[i + 1]){ %>
-    <%searchArray.splice(i, 1) %>
- <% }%>
-<% } %>
-
-<% for (i = 0; i < searchArray.length; i++){ %>
-  <%if (searchArray[i] == searchArray[i + 1]){ %>
-    <%searchArray.splice(i, 1) %>
- <% }%>
-<% } %>
-
-<% for (i = 0; i < searchArray.length; i++){ %>
-  <%if (searchArray[i] == searchArray[i + 1]){ %>
-    <%searchArray.splice(i, 1) %>
- <% }%>
-<% } %>
-
-<!-- End removing duplicate search result. Project for later, find a better solution -->
 
 
 <div class="container">
@@ -77,7 +46,7 @@
           <% return b.views-a.views; %>
           <% }) %>
           <% if (searchArray.length > 20){ %>
-            <% for (var i = 0; i < 30; i++){ %>
+            <% for (var i = 0; i < 20; i++){ %>
                 <div class="card mb-2">
                   <div class="card-header">
                     <a href="/question/<%=sortedQuestionsArray[i].id%>" class="text-dark"> <%= sortedQuestionsArray[i].question.charAt(0).toUpperCase() + sortedQuestionsArray[i].question.slice(1) %></a>
@@ -88,7 +57,7 @@
                 </div>
             <% } %>
           <% }else{ %>
-            <% for (var i = 0; i < sortedQuestionsArray; i++){ %>
+            <% for (var i = 0; i < sortedQuestionsArray.length; i++){ %>
               <div class="card mb-2">
                 <div class="card-header">
                    <a href="/question/<%=sortedQuestionsArray[i].id%>" class="text-dark"> <%= sortedQuestionsArray[i].question.charAt(0).toUpperCase() + sortedQuestionsArray[i].question.slice(1) %></a>
