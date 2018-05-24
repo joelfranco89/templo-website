@@ -1,6 +1,6 @@
 <% include header.ejs %>
 
-<link href="css/home.css" rel="stylesheet">
+
 
 <!-- Creating array from search-->
 <% var searchSplitArray = search.split(' ') %>
@@ -65,185 +65,143 @@
       </div>
     </div>
 <% }else{ %>
+  <div class="row">
+    <div class="col-12">
+        <p>Results for <span class="font-weight-bold"><%=search%></span></p>
+        <hr>
+    </div>
+  </div>
   <div class="row">  
-    <div class="col-lg-9">     
+    <div class="col-sm-12 col-md-7 col-lg-9">          
           <% var sortedQuestionsArray = searchArray.sort(function(a, b){ %>
           <% return b.views-a.views; %>
           <% }) %>
-          <div class="list-group">
-          <% for (i = 0; i < searchArray.length; i++) { %>        
-            <a href="/question/<%= sortedQuestionsArray[i]._id %>" class="list-group-item list-group-item-action">
-              <div class="row"> 
-                <div class="col-md-6">       
-                  <p><strong><%= sortedQuestionsArray[i].question.charAt(0).toUpperCase() +  sortedQuestionsArray[i].question.slice(1)%></strong></p>
-                </div>           
-           <div class="col-md-6 icons">     
-           <div class="row">
-            <div class="col-sm-3">
-              <div class="row">
-                <div class="col-sm-12 ">
-                  <div class="badge"><%= sortedQuestionsArray[i].answers.length %></div>
+          <% if (searchArray.length > 20){ %>
+            <% for (var i = 0; i < 30; i++){ %>
+                <div class="card mb-2">
+                  <div class="card-header">
+                    <a href="/question/<%=sortedQuestionsArray[i].id%>" class="text-dark"> <%= sortedQuestionsArray[i].question.charAt(0).toUpperCase() + sortedQuestionsArray[i].question.slice(1) %></a>
+                  </div>
+                  <div class="card-body pb-0" style="font-size: 13px;">
+                  <p><%=sortedQuestionsArray[i].answers.length%> answers&nbsp; <span><%=sortedQuestionsArray[i].views%> views &nbsp;<i class="far fa-thumbs-up"></i>&nbsp;<%= sortedQuestionsArray[i].helpful %>&nbsp;&nbsp;<i class="far fa-thumbs-down"></i>&nbsp;<%= sortedQuestionsArray[i].notHelpful %></span></p> 
+                  </div>
                 </div>
-                <div class="col-sm-12">
-                  answered
+            <% } %>
+          <% }else{ %>
+            <% for (var i = 0; i < sortedQuestionsArray; i++){ %>
+              <div class="card mb-2">
+                <div class="card-header">
+                   <a href="/question/<%=sortedQuestionsArray[i].id%>" class="text-dark"> <%= sortedQuestionsArray[i].question.charAt(0).toUpperCase() + sortedQuestionsArray[i].question.slice(1) %></a>
                 </div>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="row">
-                <div class="col-sm-12 ">
-                  <div class="badge"><%= sortedQuestionsArray[i].views %></div>
-                </div>
-                <div class="col-sm-12">
-                  views
+                <div class="card-body pb-0" style="font-size: 13px;">
+                 <p><%=sortedQuestionsArray[i].answers.length%> answers&nbsp; <span><%=sortedQuestionsArray[i].views%> views &nbsp;<i class="far fa-thumbs-up"></i>&nbsp;<%= sortedQuestionsArray[i].helpful %>&nbsp;&nbsp;<i class="far fa-thumbs-down"></i>&nbsp;<%= sortedQuestionsArray[i].notHelpful %></span></p> 
                 </div>
               </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="row">
-                <div class="col-sm-12 ">
-                  <div class="badge"><%= sortedQuestionsArray[i].helpful %></div>
-                </div>
-                <div class="col-sm-12">
-                  <div><i class="far fa-thumbs-up"></i></div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="row">
-                <div class="col-sm-12 ">
-                  <div class="badge"><%= sortedQuestionsArray[i].notHelpful %></div>
-                </div>
-                <div class="col-sm-12">
-                  <div><i class="far fa-thumbs-down"></i></div>
-                </div>
-              </div>
-            </div>
-           </div>              
-           </div>
-           </div>
-            </a>
-          
-      <% } %>
-      </div> <!-- List group ends -->
-      <br>
+            <% } %>
+          <% } %>
     </div>
     
-    
-    
-    
-    <div class="col-lg-3"> 
-      <div class="list-group-item">
-        <h6>Most Answered Questions</h6>
-        <hr>
-        <% var sortedAnsweredArray = searchArray.sort(function(a, b){ %>
-        <% return b.answers.length-a.answers.length; %>
-        <% }) %>
-        <% for (i = 0; i < searchArray.length; i++){ %>
-        <a href="/<%= sortedAnsweredArray[i]._id %>"><p class="text-dark"><%= sortedAnsweredArray[i].question.charAt(0).toUpperCase() + sortedAnsweredArray[i].question.slice(1)%></p></a>
+
+    <div class="col-sm-12 col-md-5 col-lg-3"> 
+        <div class="list-group-item">
+          <h6 style="font-size: 13px;">Most Answered Questions</h6>
+          <hr>
+          <% var sortedAnsweredArray = searchArray.sort(function(a, b){ %>
+          <% return b.answers.length-a.answers.length; %>
+          <% }) %>
+          <% if (searchArray.length < 6){ %>
+            <% for (i = 0; i < searchArray.length; i++){ %>
+              <a href="/question/<%= sortedAnsweredArray[i]._id %>"><p class="text-dark mb-0" style="font-size: 13px;"><%= sortedAnsweredArray[i].question.charAt(0).toUpperCase() + sortedAnsweredArray[i].question.slice(1)%></p></a>
+              <br>
+            <% } %>
+          <% }else{ %>
+            <% for (i = 0; i < 5; i++){ %>
+              <a href="/question/<%= sortedAnsweredArray[i]._id %>"><p class="text-dark mb-0" style="font-size: 13px;"><%= sortedAnsweredArray[i].question.charAt(0).toUpperCase() + sortedAnsweredArray[i].question.slice(1)%></p></a>
+              <br>
+              <% } %>
+          <% } %>
+        </div>
+        
         <br>
-        <% } %>
-      </div>
-      
-      <br>
-      
-      <div class="list-group-item">
-        <h6>Top Viewed Questions</h6>
-        <hr>
-        <% var sortedViewsArray = searchArray.sort(function(a, b){ %>
-        <% return b.views-a.views; %>
-        <% }) %>
-        <% for (i = 0; i < searchArray.length; i++){ %>
-          <a href="/<%= sortedViewsArray[i]._id %>"><p class="text-dark"><%= sortedViewsArray[i].question.charAt(0).toUpperCase() + sortedViewsArray[i].question.slice(1)%></p></a>
-          <br>
-        <% } %>
-      </div>
-      
-      <br>
-      
-      
-      <div class="list-group-item">
-        <h6>Most helpful</h6>
-        <hr>
-        <% var sortedHelpfulArray = searchArray.sort(function(a, b){ %>
-        <% return b.helpful-a.helpful; %>
-        <% }) %>
-        <% for (i = 0; i < searchArray.length; i++){ %>
-        <a href="/<%= sortedHelpfulArray[i]._id %>"><p class="text-dark"><%= sortedHelpfulArray[i].question.charAt(0).toUpperCase() + sortedHelpfulArray[i].question.slice(1)%></p></a>
+        
+        <div class="list-group-item">
+          <h6 style="font-size: 13px;">Top Viewed Questions</h6>
+          <hr>
+          <% var sortedViewsArray = searchArray.sort(function(a, b){ %>
+          <% return b.views-a.views; %>
+          <% }) %>
+          <% if (searchArray.length < 6){ %>
+            <% for (i = 0; i < searchArray.length; i++){ %>
+              <a href="/question/<%= sortedViewsArray[i]._id %>"><p class="text-dark mb-0" style="font-size: 13px;"><%= sortedViewsArray[i].question.charAt(0).toUpperCase() + sortedViewsArray[i].question.slice(1)%></p></a>
+              <br>
+            <% } %>             
+          <% }else{ %>
+            <% for (i = 0; i < 5; i++){ %>
+              <a href="/question/<%= sortedViewsArray[i]._id %>"><p class="text-dark mb-0" style="font-size: 13px;"><%= sortedViewsArray[i].question.charAt(0).toUpperCase() + sortedViewsArray[i].question.slice(1)%></p></a>
+              <br>
+            <% } %>
+          <% } %>
+
+        </div>
+        
         <br>
-        <% } %>
-      </div>
-      
-      
-      <br>  
-      
-      
-      <div class="list-group-item">
-        <h6>Least helpful</h6>
-        <hr>
-        <% var sortedNotHelpfulArray = searchArray.sort(function(a, b){ %>
-        <% return b.notHelpful-a.notHelpful; %>
-        <% }) %>
-        <% for (i = 0; i < searchArray.length; i++){ %>
-        <a href="/<%= sortedNotHelpfulArray[i]._id %>"><p class="text-dark"><%= sortedNotHelpfulArray[i].question.charAt(0).toUpperCase() + sortedNotHelpfulArray[i].question.slice(1)%></p></a>
+        
+        
+        <div class="list-group-item">
+          <h6 style="font-size: 13px;">Most Helpful</h6>
+          <hr>
+          <% var sortedHelpfulArray = searchArray.sort(function(a, b){ %>
+          <% return b.helpful-a.helpful; %>
+          <% }) %>
+          <% if (searchArray.length < 6){ %>
+            <% for (i = 0; i < searchArray.length; i++){ %>
+              <a href="/question/<%= sortedHelpfulArray[i]._id %>"><p class="text-dark mb-0" style="font-size: 13px;"><%= sortedHelpfulArray[i].question.charAt(0).toUpperCase() + sortedHelpfulArray[i].question.slice(1)%></p></a>
+              <br>
+            <% } %>  
+          <% }else{ %>
+            <% for (i = 0; i < 5; i++){ %>
+              <a href="/question/<%= sortedHelpfulArray[i]._id %>"><p class="text-dark mb-0" style="font-size: 13px;"><%= sortedHelpfulArray[i].question.charAt(0).toUpperCase() + sortedHelpfulArray[i].question.slice(1)%></p></a>
+              <br>
+            <% } %>
+          <% } %>
+  
+        </div>
+  
+        
+        
+        <br>  
+        
+        
+        <div class="list-group-item">
+          <h6 style="font-size: 13px;">Least Helpful</h6>
+          <hr>
+          <% var sortedNotHelpfulArray = searchArray.sort(function(a, b){ %>
+          <% return b.notHelpful-a.notHelpful; %>
+          <% }) %>
+          <% if (searchArray.length < 6){ %>
+            <% for (i = 0; i < searchArray.length; i++){ %>
+              <a href="/question/<%= sortedNotHelpfulArray[i]._id %>"><p class="text-dark mb-0" style="font-size: 13px;"><%= sortedNotHelpfulArray[i].question.charAt(0).toUpperCase() + sortedNotHelpfulArray[i].question.slice(1)%></p></a>
+              <br>
+            <% } %>             
+          <% }else{ %>
+            <% for (i = 0; i < 5; i++){ %>
+              <a href="/question/<%= sortedNotHelpfulArray[i]._id %>"><p class="text-dark mb-0" style="font-size: 13px;"><%= sortedNotHelpfulArray[i].question.charAt(0).toUpperCase() + sortedNotHelpfulArray[i].question.slice(1)%></p></a>
+              <br>
+              <% } %>
+          <% } %>
+
+        </div>
+        
+        
         <br>
-        <% } %>
-      </div>
-      
-      
-      <br>
-      
-      
-      </div>
+        
+        </div>
     
 
   </div>
     <%  } %>
 </div>
-<style>
-  @media only screen and (max-width: 760px) {
-    .icons{
-      display: none;
-    }
 
-    em{
-      font-size: 20px;
-    }
-    
-    .jumbotron{
-      height: 330px;
-      position: relative; 
-    }
-
-  .quotesDiv{
-    position: absolute;
-    bottom: 0;
-  }
-
-  }
-
-    @media only screen and (min-width: 761px) {
-
-    em{
-      font-size: 30px;
-    }
-
-    footer{
-      font-size: 20px;
-    }
-    
-
-  .jumbotron{
-    height: 250px;
-    position: relative; 
-  }
-
-  .quotesDiv{
-    position: absolute;
-    bottom: 0;
-  }
-  }
-  </style>
 
   <script>
     $.get( "https://api.mlab.com/api/1/databases/templo/collections/motivationalquotes?apiKey=zJZdthm4HNnURfvKlosWFVCMyAkSjF88", function(quotes) {

@@ -21,6 +21,8 @@ var homeRoutes = require("./routes/home_routes.js"),
     forgotPasswordRoute = require("./routes/password_reset_route.js"),
     adminRoutes = require("./routes/admin_routes.js"),
     footerRoutes = require("./routes/footer_routes.js")
+
+
     
 
 
