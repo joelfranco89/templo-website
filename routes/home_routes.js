@@ -25,9 +25,6 @@ app.get("/", function(req, res){
 //Categories Routes
 app.get("/categories/kneepain", function(req, res){
 
-
-
-
   Question.find(function(err, questions){
 
   //Array with duplicates
@@ -51,6 +48,32 @@ app.get("/categories/kneepain", function(req, res){
       }
       res.render("kneePain.ejs", {kneePainResults: kneePainResults})
   });
+});
+
+app.get("/categories/depressionandanxiety", function(req, res){
+  Question.find(function(err, questions){
+
+    //Array with duplicates
+    var results = []
+  
+    var depressionAndAnxietyResults = []
+  
+      questions.forEach(function(question){
+        for (var i = 0; i < categories.depressionAndAnxiety.length; i++){
+          if (question.question.toLowerCase().includes(categories.depressionAndAnxiety[i].toLowerCase())){
+            results.unshift(question);
+            }
+          }
+        })
+  
+  
+        for (var i = 0; i < results.length; i++){
+          if (depressionAndAnxietyResults.indexOf(results[i] == -1)){
+            depressionAndAnxietyResults.push(results[i]);
+          }
+        }
+        res.render("depressionAndAnxiety.ejs", {depressionAndAnxietyResults: depressionAndAnxietyResults})
+    }); 
 });
 
 module.exports = app;
