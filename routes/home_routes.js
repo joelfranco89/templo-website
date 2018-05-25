@@ -49,7 +49,7 @@ app.get("/categories/kneepain", function(req, res){
           kneePainResults.push(results[i]);
         }
       }
-      res.render("kneepain.ejs", {kneePainResults: kneePainResults})
+      res.render("kneePain.ejs", {kneePainResults: kneePainResults})
   });
 });
 
