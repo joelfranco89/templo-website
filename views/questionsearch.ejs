@@ -33,6 +33,32 @@
         </div>
       </div>
     </div>
+    <br>
+
+        <div class="row">
+          <div class="col-12">
+            <p class="text-center">These questions are looking for answers. </p>
+          </div>
+          <% var unansweredQuestions = [] %>
+          <% questions.forEach(function(question){ %>
+                <% if (question.answers.length == 0){ %>
+                      <% unansweredQuestions.unshift(question) %>
+                <% } %>
+          <% }) %>
+        <% for (i = 0; i < 12; i++) { %>  
+          <div class="col-sm-12 col-md-4">     
+          <div class="card mb-2">
+            <div class="card-header">
+               <a href="/question/<%=questions[i].id%>" class="text-dark"> <%= unansweredQuestions[i].question.charAt(0).toUpperCase() + unansweredQuestions[i].question.slice(1) %></a>
+            </div>
+            <div class="card-body pb-0" style="font-size: 13px;">
+             <p><%=unansweredQuestions[i].answers.length%> answers&nbsp; <span><%=unansweredQuestions[i].views%> views &nbsp;<i class="far fa-thumbs-up"></i>&nbsp;<%= unansweredQuestions[i].helpful %>&nbsp;&nbsp;<i class="far fa-thumbs-down"></i>&nbsp;<%= unansweredQuestions[i].notHelpful %></span></p> 
+            </div>
+          </div>
+          </div>
+        <% } %>
+        </div>
+    
 <% }else{ %>
   <div class="row">
     <div class="col-12">

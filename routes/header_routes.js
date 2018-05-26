@@ -71,7 +71,7 @@ app.post("/newquestion", function(req, res){
 //New search route
 app.post("/questionsearch", function(req, res){
   var newSearch = req.body.searchInput
-  Question.find(req.params.id, function(err, questions){
+  Question.find(function(err, questions){
     if (err){
       res.send(err);
     }else{
