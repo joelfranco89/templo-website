@@ -18,7 +18,7 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="google-site-verification" content="gdyahO8Z7jNiORdrQtLq7cxstaMBu4LGmaFjKspsDdY" />
-  <meta name="description" content="Find answers to questions or ask a question yourself related to knee pain." >
+  <meta name="description" content="Find answers to questions or ask a question yourself related to knee pain. Let's all work together by sharing our opinion." >
 
     <!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -221,6 +221,11 @@
 
 
 <div class="container">
+        <%if (message && message.length > 0){%>
+            <div class="alert alert-info">
+              <%=message%>
+            </div>
+          <%}%>  
     <div class="row">
         <div class="col-sm-12 col-md-8 col-lg-9">
             <% if (kneePainResults.length < 31){ %>

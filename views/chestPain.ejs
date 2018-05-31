@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
 		<link rel="shortcut icon" href="../images/templotitlelogo.ico" />
-    <title>Depression and Anxiety - TEMPLO</title>
+    <title>Shoulder Pain - TEMPLO</title>
 	  <!-- Google analytics -->
 	  <!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118150283-1"></script>
@@ -17,8 +17,8 @@
   	<!-- Required meta tags -->
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="google-site-verification" content="gdyahO8Z7jNiORdrQtLq7cxstaMBu4LGmaFjKspsDdY" />
-    <meta name="description" content="Find answers to questions or ask a question yourself related to depression and anxiety. Let's all work together to fight this condition.">
+  <meta name="google-site-verification" content="gdyahO8Z7jNiORdrQtLq7cxstaMBu4LGmaFjKspsDdY" />
+  <meta name="description" content="Find answers to questions or ask a question yourself related to shoulder pain. Let's all work together by sharing our opinion." >
 
     <!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -216,10 +216,12 @@
 		});
   </script>
   
-    <!-- HAD TO COPY PASTE HEADER ABOVE SO I CAN AD -->
+    <!-- HAD TO COPY PASTE HEADER ABOVE SO I CAN ADD SEO -->
+
 
 
 <div class="container">
+
         <%if (message && message.length > 0){%>
             <div class="alert alert-info">
               <%=message%>
@@ -227,14 +229,14 @@
           <%}%>  
     <div class="row">
         <div class="col-sm-12 col-md-8 col-lg-9">
-            <% if (depressionAndAnxietyResults.length < 31){ %>
-                <% for (var i = 0; i < depressionAndAnxietyResults.length; i++){ %>
+            <% if (chestPainResults.length < 31){ %>
+                <% for (var i = 0; i < chestPainResults.length; i++){ %>
                     <div class="card mb-2">
                         <div class="card-header">
-                            <a href="/question/<%=depressionAndAnxietyResults[i].id%>" class="text-dark"> <%= depressionAndAnxietyResults[i].question.charAt(0).toUpperCase() + depressionAndAnxietyResults[i].question.slice(1) %></a>
+                            <a href="/question/<%=chestPainResults[i].id%>" class="text-dark"> <%= chestPainResults[i].question.charAt(0).toUpperCase() + chestPainResults[i].question.slice(1) %></a>
                         </div>
                         <div class="card-body pb-0" style="font-size: 13px;">
-                             <p><%=depressionAndAnxietyResults[i].answers.length%> answers&nbsp; <span><%=depressionAndAnxietyResults[i].views%> views &nbsp;<i class="far fa-thumbs-up"></i>&nbsp;<%= depressionAndAnxietyResults[i].helpful %>&nbsp;&nbsp;<i class="far fa-thumbs-down"></i>&nbsp;<%= depressionAndAnxietyResults[i].notHelpful %></span></p> 
+                             <p><%=chestPainResults[i].answers.length%> answers&nbsp; <span><%=chestPainResults[i].views%> views &nbsp;<i class="far fa-thumbs-up"></i>&nbsp;<%= chestPainResults[i].helpful %>&nbsp;&nbsp;<i class="far fa-thumbs-down"></i>&nbsp;<%= chestPainResults[i].notHelpful %></span></p> 
                         </div>
                     </div>                   
                 <% } %>
@@ -242,10 +244,10 @@
                 <% for (var i = 0; i < 30; i++ ){ %>
                     <div class="card mb-2">
                         <div class="card-header">
-                            <a href="/question/<%=depressionAndAnxietyResults[i].id%>" class="text-dark"> <%= depressionAndAnxietyResults[i].question.charAt(0).toUpperCase() + depressionAndAnxietyResults[i].question.slice(1) %></a>
+                            <a href="/question/<%=chestPainResults[i].id%>" class="text-dark"> <%= chestPainResults[i].question.charAt(0).toUpperCase() + chestPainResults[i].question.slice(1) %></a>
                         </div>
                         <div class="card-body pb-0" style="font-size: 13px;">
-                            <p><%=depressionAndAnxietyResults[i].answers.length%> answers&nbsp; <span><%=depressionAndAnxietyResults[i].views%> views &nbsp;<i class="far fa-thumbs-up"></i>&nbsp;<%= depressionAndAnxietyResults[i].helpful %>&nbsp;&nbsp;<i class="far fa-thumbs-down"></i>&nbsp;<%= depressionAndAnxietyResults[i].notHelpful %></span></p> 
+                            <p><%=chestPainResults[i].answers.length%> answers&nbsp; <span><%=chestPainResults[i].views%> views &nbsp;<i class="far fa-thumbs-up"></i>&nbsp;<%= chestPainResults[i].helpful %>&nbsp;&nbsp;<i class="far fa-thumbs-down"></i>&nbsp;<%= chestPainResults[i].notHelpful %></span></p> 
                         </div>
                     </div>  
                 <% } %>
@@ -254,11 +256,11 @@
 
 
         <div class="col-sm-12 col-md-4 col-lg-3">
-            <% if (depressionAndAnxietyResults.length < 6){ %>
+            <% if (chestPainResults.length < 6){ %>
                     <div class="list-group-item">
                         <h6 style="font-size: 13px;">Most Answered Questions</h6>
                         <hr>
-                        <% var sortedAnsweredArray = depressionAndAnxietyResults.sort(function(a, b){ %>
+                        <% var sortedAnsweredArray = chestPainResults.sort(function(a, b){ %>
                         <% return b.answers.length-a.answers.length; %>
                         <% }) %>
                         <% for (i = 0; i < sortedAnsweredArray.length; i++){ %>
@@ -272,7 +274,7 @@
                     <div class="list-group-item">
                             <h6 style="font-size: 13px;">Top Viewed Questions</h6>
                             <hr>
-                            <% var sortedViewsArray = depressionAndAnxietyResults.sort(function(a, b){ %>
+                            <% var sortedViewsArray = chestPainResults.sort(function(a, b){ %>
                             <% return b.views-a.views; %>
                             <% }) %>
                             <% for (i = 0; i < sortedViewsArray.length; i++){ %>
@@ -286,7 +288,7 @@
                     <div class="list-group-item">
                             <h6 style="font-size: 13px;">Most Helpful</h6>
                             <hr>
-                            <% var sortedHelpfulArray = depressionAndAnxietyResults.sort(function(a, b){ %>
+                            <% var sortedHelpfulArray = chestPainResults.sort(function(a, b){ %>
                             <% return b.helpful-a.helpful; %>
                             <% }) %>
                             <% for (i = 0; i < sortedHelpfulArray.length; i++){ %>
@@ -300,7 +302,7 @@
                     <div class="list-group-item">
                             <h6 style="font-size: 13px;">Least Helpful</h6>
                             <hr>
-                            <% var sortedNotHelpfulArray = depressionAndAnxietyResults.sort(function(a, b){ %>
+                            <% var sortedNotHelpfulArray = chestPainResults.sort(function(a, b){ %>
                             <% return b.notHelpful-a.notHelpful; %>
                             <% }) %>
                             <% for (i = 0; i < sortedHelpfulArray.length; i++){ %>
@@ -314,7 +316,7 @@
                 <div class="list-group-item">
                         <h6 style="font-size: 13px;">Most Answered Questions</h6>
                         <hr>
-                        <% var sortedAnsweredArray = depressionAndAnxietyResults.sort(function(a, b){ %>
+                        <% var sortedAnsweredArray = chestPainResults.sort(function(a, b){ %>
                         <% return b.answers.length-a.answers.length; %>
                         <% }) %>
                         <% for (i = 0; i < 5; i++){ %>
@@ -328,7 +330,7 @@
                 <div class="list-group-item">
                         <h6 style="font-size: 13px;">Top Viewed Questions</h6>
                         <hr>
-                        <% var sortedViewsArray = depressionAndAnxietyResults.sort(function(a, b){ %>
+                        <% var sortedViewsArray = chestPainResults.sort(function(a, b){ %>
                         <% return b.views-a.views; %>
                         <% }) %>
                         <% for (i = 0; i < 5; i++){ %>
@@ -342,7 +344,7 @@
                       <div class="list-group-item">
                             <h6 style="font-size: 13px;">Most Helpful</h6>
                             <hr>
-                            <% var sortedHelpfulArray = depressionAndAnxietyResults.sort(function(a, b){ %>
+                            <% var sortedHelpfulArray = chestPainResults.sort(function(a, b){ %>
                             <% return b.helpful-a.helpful; %>
                             <% }) %>
                             <% for (i = 0; i < 5; i++){ %>
@@ -356,7 +358,7 @@
                         <div class="list-group-item">
                                 <h6 style="font-size: 13px;">Least Helpful</h6>
                                 <hr>
-                                <% var sortedNotHelpfulArray = depressionAndAnxietyResults.sort(function(a, b){ %>
+                                <% var sortedNotHelpfulArray = chestPainResults.sort(function(a, b){ %>
                                 <% return b.notHelpful-a.notHelpful; %>
                                 <% }) %>
                                 <% for (i = 0; i < 5; i++){ %>

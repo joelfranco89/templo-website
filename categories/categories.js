@@ -17,7 +17,6 @@ module.exports = {
     ],
     shoulderPain: [
         "shoulder",
-        "shoulders",
         "rotator cuff",
         "deltoid"
     ],
@@ -25,7 +24,10 @@ module.exports = {
         "back",
         "spine",
         "backbone",
-        "sciatica"
+        "sciatica",
+        "spinal stenosis",
+        "herniated disc",
+        "sciatic nerve"
     ],
     chestPain: [
         "chest",
@@ -34,6 +36,10 @@ module.exports = {
     stomachPain: [
         "stomach",
         "ulcer",
-        "gastric"
+        "gastric",
+        "abdominal",
+        "diarrhea",
+        "cramps",
+        "abdomen"
     ]
 }
