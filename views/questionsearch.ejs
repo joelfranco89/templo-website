@@ -297,7 +297,10 @@
                   </div>
                   <div class="card-body pb-0" style="font-size: 13px;">
                   <p><%=sortedQuestionsArray[i].answers.length%> answers&nbsp; <span><%=sortedQuestionsArray[i].views%> views &nbsp;<i class="far fa-thumbs-up"></i>&nbsp;<%= sortedQuestionsArray[i].helpful %>&nbsp;&nbsp;<i class="far fa-thumbs-down"></i>&nbsp;<%= sortedQuestionsArray[i].notHelpful %></span></p> 
-                  </div>
+                  <% if (sortedQuestionsArray[i].answers.length > 0){ %>
+                    <p><%=sortedQuestionsArray[i].answers[0].answer%></p>   
+                   <% } %>                 
+                </div>
                 </div>
             <% } %>
           <% }else{ %>
@@ -308,6 +311,9 @@
                 </div>
                 <div class="card-body pb-0" style="font-size: 13px;">
                  <p><%=sortedQuestionsArray[i].answers.length%> answers&nbsp; <span><%=sortedQuestionsArray[i].views%> views &nbsp;<i class="far fa-thumbs-up"></i>&nbsp;<%= sortedQuestionsArray[i].helpful %>&nbsp;&nbsp;<i class="far fa-thumbs-down"></i>&nbsp;<%= sortedQuestionsArray[i].notHelpful %></span></p> 
+                 <% if (sortedQuestionsArray[i].answers.length > 0){ %>
+                  <p><%=sortedQuestionsArray[i].answers[0].answer%></p>   
+                 <% } %>    
                 </div>
               </div>
             <% } %>

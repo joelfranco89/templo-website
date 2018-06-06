@@ -18,7 +18,7 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="google-site-verification" content="gdyahO8Z7jNiORdrQtLq7cxstaMBu4LGmaFjKspsDdY" />
-  <meta name="description" content="TEMPLO is on a mission to change the world by providing a platform for people talk about their current mental and physical issues. This is an open platform where anybody can safely talk about depression, anxiety, and phyisical pain without feeling embarrassed.">
+  <meta name="description" content="TEMPLO is a tech startup on a mission to fight depression and anxiety by creating a platform for people to voice their words. We need you, the people, to help us fight depression by asking and answering questions on our platform. NO SIGN UP REQUIRED.">
 
     <!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -233,6 +233,9 @@
           <%=message%>
         </div>
       <%}%>  
+      <div class="alert alert-danger" role="alert">
+        TEMPLO is a tech start up on a mission to fight depression and anxiety by creating a platform where anybody can openly talk about any pain they are facing and trying to overcome this condition. We need everyone's help to contribute by asking and answering questions so that we can grow and reach the world. Our success in reaching millions of people relies on community efforts. No signup required so you can ask and answer without entering any personal data. Let's all fight worldwide pain together one question at a time. 
+      </div>
 
   <div class="row">
 
@@ -261,6 +264,9 @@
                   </div>
                   <div class="card-body pb-0" style="font-size: 13px;">
                    <p><%=questions[i].answers.length%> answers&nbsp; <span><%=questions[i].views%> views &nbsp;<i class="far fa-thumbs-up"></i>&nbsp;<%= questions[i].helpful %>&nbsp;&nbsp;<i class="far fa-thumbs-down"></i>&nbsp;<%= questions[i].notHelpful %></span></p> 
+                   <% if (questions[i].answers.length > 0){ %>
+                    <p><%=questions[i].answers[0].answer%></p> 
+                  <% } %>                  
                   </div>
                 </div>
               <% } %>
