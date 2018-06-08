@@ -225,27 +225,25 @@
     <div class="alert alert-danger" role="alert">
         TEMPLO is a tech start up on a mission to fight depression and anxiety by creating a platform where anybody can openly talk about any pain they are facing and trying to overcome this condition. We need everyone's help to contribute by asking and answering questions so that we can grow and reach the world. Our success in reaching millions of people relies on community efforts. No signup required so you can ask and answer without entering any personal data. Let's all fight worldwide pain together one question at a time. 
       </div>
-  <div class="jumbotron bg-white ">
-    <blockquote class="blockquote text-center">
+  <div class="card ">
+      <div class="card-header bg-danger text-white">
       <h1 class="mb-0 text-left questionTitle "><%= question.question.charAt(0).toUpperCase() + question.question.slice(1) %></h1>
-      <footer class="blockquote-footer text-left">Non medical related questions will be removed</footer>
-      <footer class="blockquote-footer text-left">
+      <footer class="blockquote-footer text-left text-white">Non medical related questions will be removed</footer>
+      <footer class="blockquote-footer text-left text-white">
         DISCLAIMER: Answers are not intended to be professional medical advice. 
         Please consult with your doctor for anything that needs medical attention.
-      </footer>
 
-      <br>
-    
+
   
   
       <%if (!currentUser){%>      
       <div class=""  data-toggle="tooltip" title="You need to be signed in" tabindex="0" >  
-          <button   class="float-left mr-1" style="pointer-events: none; font-size: 10px;" disabled>
+          <button   class="btn float-left mr-1" style="pointer-events: none; font-size: 10px;" disabled>
             Helpful &nbsp;<i class="far fa-thumbs-up"></i>&nbsp;<%= question.helpful %>
           </button>        
       </div>
       <div class=""  data-toggle="tooltip" title="You need to be signed in" tabindex="0">     
-          <button class="float-left mr-1" style="pointer-events: none; font-size: 10px;" disabled>
+          <button class="btn float-left mr-1" style="pointer-events: none; font-size: 10px;" disabled>
             Not Helpful &nbsp;<i class="far fa-thumbs-down"></i>&nbsp;<%= question.notHelpful %>
           </button>      
       </div>
@@ -267,20 +265,20 @@
 
      <% if (helpfulWasMarked == 1){ %>
       <form action="/unmarkhelpful/<%= question._id %>" method="POST">
-          <button type="submit" class="mr-1 float-left"  style="font-size: 10px;" >
+          <button type="submit" class="btn mr-1 float-left"  style="font-size: 10px;" >
             Helpful &nbsp;<i class="far fa-thumbs-up"></i>&nbsp;<%= question.helpful %>
           </button>
       </form>
      <% }else{ %>
       <%if (unhelpfulWasMarked == 1){%>
         <form action="/helpful/<%= question._id %>" method="POST">
-            <button type="submit" class="mr-1 float-left" style="font-size: 10px;" disabled>
+            <button type="submit" class="btn mr-1 float-left" style="font-size: 10px;" disabled>
               Helpful &nbsp;<i class="far fa-thumbs-up"></i>&nbsp;<%= question.helpful %>
             </button>
         </form>
       <%}else{%>
         <form action="/helpful/<%= question._id %>" method="POST">
-            <button type="submit" class="mr-1 float-left" style="font-size: 10px;" >
+            <button type="submit" class="btn mr-1 float-left" style="font-size: 10px;" >
               Helpful &nbsp;<i class="far fa-thumbs-up"></i>&nbsp;<%= question.helpful %>
             </button>
         </form>
@@ -294,20 +292,20 @@
 
       <%if (unhelpfulWasMarked == 1){%>
         <form action="/unmarknothelpful/<%= question._id %>" method="POST">
-            <button type="submit" class="mr-1 float-left" style="font-size: 10px;" >
+            <button type="submit" class="btn mr-1 float-left" style="font-size: 10px;" >
               Not Helpful &nbsp;<i class="far fa-thumbs-down"></i>&nbsp;<%= question.notHelpful %>
             </button>
          </form>
       <%}else{%>
         <% if (helpfulWasMarked == 1){ %>
           <form action="/nothelpful/<%= question._id %>" method="POST">
-              <button type="submit" class="mr-1 float-left" style="font-size: 10px;" disabled>
+              <button type="submit" class="btn mr-1 float-left" style="font-size: 10px;" disabled>
                 Not Helpful &nbsp;<i class="far fa-thumbs-down"></i>&nbsp;<%= question.notHelpful %>
               </button>
            </form>
        <% }else{ %>
         <form action="/nothelpful/<%= question._id %>" method="POST">
-            <button type="submit" class="mr-1 float-left" style="font-size: 10px;">
+            <button type="submit" class="btn mr-1 float-left" style="font-size: 10px;">
               Not Helpful &nbsp;<i class="far fa-thumbs-down"></i>&nbsp;<%= question.notHelpful %>
             </button>
          </form>
@@ -319,12 +317,12 @@
       
       
       <% if (question.authorId === "Guest"){ %>
-        <button  class="mr-1 float-left" style="font-size: 10px;" disabled>
+        <button  class="btn mr-1 float-left" style="font-size: 10px;" disabled>
         Posted by: Guest
         </button>   
       <% }else{ %>
         <a href="/profile/<%=question.authorId%>">
-        <button class="mr-1 text-dark float-left" style="font-size: 10px;" >
+        <button class="btn mr-1 text-dark float-left" style="font-size: 10px;" >
         Posted by: <%= question.authorUsername %>
         </button> 
         </a>      
@@ -333,11 +331,11 @@
       
     <!-- Button trigger modal -->
     <% if (question.answers.length == 0) { %>
-      <button  class="mr-1 float-left" style="font-size: 10px;" data-toggle="modal" data-target="#exampleModal">
+      <button  class="btn mr-1 float-left" style="font-size: 10px;" data-toggle="modal" data-target="#exampleModal">
         Be the first to answer this question
       </button>  
     <% }else{ %>
-      <button  class="mr-1 float-left" style="font-size: 10px;" data-toggle="modal" data-target="#exampleModal">
+      <button  class="btn mr-1 float-left" style="font-size: 10px;" data-toggle="modal" data-target="#exampleModal">
         Answer
       </button>  
     <% } %>
@@ -371,7 +369,7 @@
       <!-- Delete Button -->
       <%if (currentUser && currentUser._id == question.authorId || currentUser && currentUser.isAdmin){ %>
         <form action="/deletequestion/<%=question._id%>?_method=DELETE" method="POST">
-          <button type="submit" class="mr-1 float-left" style="font-size: 10px;;">
+          <button type="submit" class="btn mr-1 float-left" style="font-size: 10px;;">
           Delete
           </button> 
         </form>
@@ -390,14 +388,14 @@
 
       <% if ( currentUser && isFollowing){ %>
         <form action="/unfollowquestion/<%=question._id%>" method="POST">
-          <button class="mr-1 float-left" style="font-size: 10px;">Unfollow Question <%=question.userEmailsArray.length%></button>
+          <button class="btn mr-1 float-left" style="font-size: 10px;">Unfollow Question <%=question.userEmailsArray.length%></button>
         </form>
       <% } %>
 
 
       <% if ( currentUser && !isFollowing){ %>
         <form action="/followquestion/<%=question._id%>" method="POST">
-          <button class="mr-1 float-left" style="font-size: 10px;">Follow Question <%=question.userEmailsArray.length%></button>
+          <button class="btn mr-1 float-left" style="font-size: 10px;">Follow Question <%=question.userEmailsArray.length%></button>
         </form>
       <% } %>
       
@@ -405,70 +403,72 @@
 
       <%if (!currentUser){ %>
         <div class="float-left"  data-toggle="tooltip" title="You need to be signed in">  
-            <button class="mr-1 float-left" style="pointer-events: none; font-size: 10px;" disabled>
+            <button class="btn mr-1 float-left" style="pointer-events: none; font-size: 10px;" disabled>
               Follow Question <%=question.userEmailsArray.length%>
             </button>        
         </div>
       <% } %>
 
 
-    </blockquote>
       
-
+  </div>
       
-      
-
-
-
-
-</div>
-
-
-
 <!--Array of answers-->
 
-<div class="container">
+<div class="card-body">
 
-          <!--Message Display-->
-          <%if (message && message.length > 0){%>
-            <div class="alert alert-info">
-              <%=message%>
-            </div>
-          <%}%> 
-
-    <% if (question.answers.length == 0){ %>
-      <div class="row">
-          <div class="col-md-12">
-              <p class="text-center">This question has not been answered yet</p>
-          </div>
-        </div>
-    <% } %>
-
-
-
-
-    <div class="row">
-      <div class="col-md-12 text-left">
-          <% question.answers.forEach(function(answer){ %>       
-              <p><%-answer.answer.replace(/\n/g, "<br>")%></p>
-              <hr>
-              <% if (typeof currentUser !== "undefined" && currentUser._id == answer.authorId || currentUser && currentUser.isAdmin){ %>  
-                <form action="/deleteanswer/<%=answer._id%>/question/<%=answer.questionId%>?_method=DELETE" method="POST">
-                  <button type="submit" class="btn btn-sm btn-outline-danger float-right">Delete</button>
-                </form>
-              <% } %>
-          <% }); %>
+    <!--Message Display-->
+    <%if (message && message.length > 0){%>
+      <div class="alert alert-info">
+        <%=message%>
       </div>
-     
-      
-      
-      <!-- <div class="col-md-3">
-        Ads will possibly be displayed here
-      </div> -->
-      
-    </div>
+    <%}%> 
+
+<% if (question.answers.length == 0){ %>
+        <p class="text-center">This question has not been answered yet</p>
+<% } %>
+
+
+
+
+<div class="row">
+<div class="col-md-12 text-left">
+    <% question.answers.forEach(function(answer){ %>       
+        <p><%-answer.answer.replace(/\n/g, "<br>")%></p>
+        <hr>
+        <% if (typeof currentUser !== "undefined" && currentUser._id == answer.authorId || currentUser && currentUser.isAdmin){ %>  
+          <form action="/deleteanswer/<%=answer._id%>/question/<%=answer.questionId%>?_method=DELETE" method="POST">
+            <button type="submit" class="btn btn-sm btn-outline-danger float-right">Delete</button>
+          </form>
+        <% } %>
+    <% }); %>
+</div>
+
+
+
+<!-- <div class="col-md-3">
+  Ads will possibly be displayed here
+</div> -->
 
 </div>
+
+</div> 
+  
+
+
+
+
+
+
+
+
+
+
+</div>
+
+</div>
+
+
 </div>
 
 
@@ -499,6 +499,7 @@
 $( document ).ready(function() {
   
     $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="tooltip1"]').tooltip();
 
 			$("#newAnswerInput").on("keyup", function(){
 				if ($("#newAnswerInput").val().length > 10){
