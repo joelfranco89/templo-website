@@ -4,23 +4,24 @@ var express = require("express"),
 
 //Route to user profile
 app.get("/profile/:id", function(req, res){
-
+  req.flash("success", "User profile is currently under construction");
+  res.redirect("back");
   
-  User.findById(req.params.id, function(err, user){
-    if (err){
-      res.send("User could not be located");
-    }else if (typeof req.user != "undefined" && user.profile.isHidden && req.user.id == req.params.id){
-      res.render("userprofile.ejs", {user: user});
-    }else if (typeof req.user != "undefined" && user.profile.isHidden){
-      req.flash("success", "User has hidden their profile")
-      res.redirect("back");
-    }else if (typeof req.user == "undefined" && user.profile.isHidden){
-      req.flash("success", "User has hidden their profile")
-      res.redirect("back");
-    }else{
-      res.render("userprofile.ejs", {user: user})
-    }
-  });
+  // User.findById(req.params.id, function(err, user){
+  //   if (err){
+  //     res.send("User could not be located");
+  //   }else if (typeof req.user != "undefined" && user.profile.isHidden && req.user.id == req.params.id){
+  //     res.render("userprofile.ejs", {user: user});
+  //   }else if (typeof req.user != "undefined" && user.profile.isHidden){
+  //     req.flash("success", "User has hidden their profile")
+  //     res.redirect("back");
+  //   }else if (typeof req.user == "undefined" && user.profile.isHidden){
+  //     req.flash("success", "User has hidden their profile")
+  //     res.redirect("back");
+  //   }else{
+  //     res.render("userprofile.ejs", {user: user})
+  //   }
+  // });
 });
 
 //Route to change email
