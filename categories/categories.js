@@ -13,7 +13,8 @@ module.exports = {
         "bi-polar",
         "mental",
         "nervous breakdown",
-        "depressive"
+        "depressive",
+        "suicide"
     ],
     shoulderPain: [
         "shoulder",
