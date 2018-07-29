@@ -10,44 +10,34 @@
 		window.dataLayer = window.dataLayer || [];
 		function gtag(){dataLayer.push(arguments);}
 		gtag('js', new Date());
-
 		gtag('config', 'UA-118150283-1');
 		</script>
-
   	<!-- Required meta tags -->
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="google-site-verification" content="gdyahO8Z7jNiORdrQtLq7cxstaMBu4LGmaFjKspsDdY" />
   <meta name="description" content="TEMPLO is a tech startup on a mission to fight depression and anxiety. We need your help by answering and asking questions so that we can reach millions dealing with a terrible condition that is mental health.">
-
-    <!-- Bootstrap CSS -->
+  <!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<!-- Public CSS -->
 	<link rel="stylesheet" href="../css/global.css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
-
-		
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">		
   </head>
-  <body>
-		
+  <body>	
 		<!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-		
+	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>		
 	<style>
 		#temploLogo{
 			font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', sans-serif;
 		}
-
 		#betaLogo{
 			font-family: 'Times New Roman', Times, serif
 		}
-
-
 		a{
 			cursor: pointer;
 			text-decoration: none;
@@ -55,85 +45,24 @@
 		button{
 			text-decoration: none;
     }
-    
-    
-
 	</style>
-	
-
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		
-		
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">		
 		<a class="navbar-brand text-danger" href="/" id="temploLogo">TEMPLO <span id="betaLogo">beta</span></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<% if (!currentUser){ %>
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle btn btn-danger btn-sm" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
-						Menu
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="/login">Login</a>
-						<a class="dropdown-item" href="/signup">Signup</a>
-					</div>
-				</li>
-			</ul>	
-
-			<% }else{ %>
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle btn btn-sm btn-danger" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
-						Hello <%= currentUser.username %>!
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="/profile/<%= currentUser._id %>">My profile</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="/logout">Logout</a>
-					</div>
-				</li>
-			</ul>
-			<% } %>
-			
-
-			<!-- <div class="btn-group" style="margin-right: 5px;"> -->
 				<% if (currentUser && currentUser.isAdmin){ %>
 					<a href="/admin/questions"><button class="btn btn-warning">Admin</button></a>
 				<%}%>	
-				<!-- <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Ask a new question
-				</button>
-				<div class="dropdown-menu">
-					<form class="px-4 py-3" action="/newquestion" method="POST">
-							<textarea id="newQuestionInput" name="question" maxlength="200"></textarea>
-							<footer id="newquestionCharacters" class="blockquote-footer text-left">0</footer>
-						<div class="dropdown-divider"></div>
-						<button id="newQuestionButton" type="submit" class="btn btn-primary" disabled>Submit</button>
-					</form>
-				</div>
-			</div>
- -->
-
-
 			<form class="form-inline my-2 my-lg-0" action="/questionsearch" method="POST">
 				<input name="searchInput" id="searchInput" class="form-control mr-sm-2" type="text" placeholder="Search Templo" aria-label="Search" maxlength="100">
 				<button id="searchButton" class="btn btn-sm btn-outline-danger my-2 my-sm-0" type="submit" disabled>Search</button>
 			</form>
 		</div>
 	</nav> 
-
-
-
     <div class=" jumbotron jumbotron-signed-in text-center text-white bg-danger p-2" >
-      <!-- <div class="quotesDiv " >
-        <em class="lead quote-font" id="quotes"></em>
-        <footer class="blockquote-footer text-white" id="author"></footer>  
-	  </div> -->
 	  <p class="font-weight-bold mt-4" style="font-size: 20px;">Ask. Get Answers. Simple.</p>
-
     <form action="/newquestion" method="POST" class="form-inline justify-content-center mb-4">
       <div class="form-group mb-0">
         <input type="text" name="question" class="form-control" id="inputPassword2" placeholder="Ask a question...." size="28">
@@ -141,7 +70,6 @@
       <button type="submit" class="btn btn-light">Ask</button>
     </form>
 	</div>
-
 	<style>
 		@media only screen and (min-width: 375px){
 			.quotesDiv{
@@ -153,16 +81,19 @@
 				height: 100px;
 			}
 		}
-
+    @media only screen and (max-width: 760px){
+    .quotesDiv{
+      height: 250px;;
+    }
+  }
+    @media only screen and (min-width: 761px){
+    .quotesDiv{
+      height: 100px;;
+    }
+  }
   </style>
-	
-
-
-
-
 	<script>
 		$(document).ready(function() {
-
 			$("#searchInput").on("keyup", function(){
 				if ($("#searchInput").val().length > 3){
 					$("#searchButton").removeAttr("disabled");
@@ -190,46 +121,9 @@
 						
 				
 			})
-
-    // $.get( "https://api.mlab.com/api/1/databases/templo/collections/motivationalquotes?apiKey=zJZdthm4HNnURfvKlosWFVCMyAkSjF88", function(quotes) {
-      
-  
-	  // var initialQuote =  Math.floor((Math.random() * (quotes.length)));
-	  // $("#quotes").html(quotes[initialQuote].quote); 
-	  // $("#author").html(quotes[initialQuote].author);
-	  
-		 
-	  //  function newQuote(){
-		//    i = Math.floor((Math.random() * (quotes.length)));
-		//    $("#quotes").fadeOut(2000, function(){
-		// 	 $("#quotes").fadeIn(2000)
-		// 	 $("#quotes").html(quotes[i].quote);
-		//    });
-		//    $("#author").fadeOut(2000, function(){
-		// 	 $("#author").fadeIn(2000)
-		// 	 $("#author").html(quotes[i].author);
-		//    });
-		   
-		//  }
-   
-		//  setInterval(newQuote, 20000);
-	  //  });
-
 		});
-  </script>
-  
-    <!-- HAD TO COPY PASTE HEADER ABOVE SO I CAN AD -->
-
-
-
-
-
- 
-
-
-
+  </script> 
   <div class="container">
-
       <%if (message && message.length > 0){%>
         <div class="alert alert-info">
           <%=message%>
@@ -238,49 +132,46 @@
       <div class="alert alert-danger" role="alert">
         TEMPLO is a tech start up on a mission to fight depression and anxiety by creating a platform where anybody can openly talk about any pain they are facing and trying to overcome this condition. We need everyone's help to contribute by asking and answering questions so that we can grow and reach the world. Our success in reaching millions of people relies on community efforts. No signup required so you can ask and answer without entering any personal data. Let's all fight worldwide pain together one question at a time. 
       </div>
-
   <div class="row">
-
     <div class="col-sm-12 col-md-2 col-lg-3 mb-4">      
-              <div class="card mb-2">
-                <div class="card-header bg-danger text-white">
-                  Categories
-                </div>
-                <div class="card-body" style="font-size: 13px;">
-                    <a class="text-dark" style="font-size: 13px;" href="/categories/depressionandanxiety">Depression and Anxiety</a>
-                    <br>
-                    <a class="text-dark" style="font-size: 13px;" href="/categories/kneepain">Knee Pain</a>
-                    <br>
-                    <a class="text-dark" style="font-size: 13px;" href="/categories/shoulderpain">Shoulder Pain</a>
-                    <br>
-                    <a class="text-dark" style="font-size: 13px;" href="/categories/backpain">Back Pain</a>
-                    <br>
-                    <a class="text-dark" style="font-size: 13px;" href="/categories/chestpain">Chest Pain</a>
-                    <br>
-                    <a class="text-dark" style="font-size: 13px;" href="/categories/stomachpain">Stomach Pain</a>             
-                </div>
-              </div>
-    </div>
-      
+      <div class="card mb-2">
+        <div class="card-header bg-danger text-white">
+          Categories
+        </div>
+      <div class="card-body" style="font-size: 13px;">
+        <a class="text-dark" style="font-size: 13px;" href="/categories/depressionandanxiety">Depression and Anxiety</a>
+          <br>
+        <a class="text-dark" style="font-size: 13px;" href="/categories/kneepain">Knee Pain</a>
+          <br>
+        <a class="text-dark" style="font-size: 13px;" href="/categories/shoulderpain">Shoulder Pain</a>
+          <br>
+        <a class="text-dark" style="font-size: 13px;" href="/categories/backpain">Back Pain</a>
+          <br>
+        <a class="text-dark" style="font-size: 13px;" href="/categories/chestpain">Chest Pain</a>
+          <br>
+        <a class="text-dark" style="font-size: 13px;" href="/categories/stomachpain">Stomach Pain</a>             
+        </div>
+      </div>
+    </div>    
     <div class="col-sm-12 col-md-6 col-lg-6">  
-          <% for (i = 0; i < 20; i++) { %>       
-                <div class="card mb-2">
-                  <div class="card-header bg-danger text-white">
-                     <a href="/question/<%=questions[i].id%>" class="text-white"> <%= questions[i].question.charAt(0).toUpperCase() + questions[i].question.slice(1) %></a>
-                  </div>
-                  <div class="card-body pb-0" style="font-size: 13px;">
-                   <p><%=questions[i].answers.length%> answers&nbsp; <span><%=questions[i].views%> views &nbsp;<i class="far fa-thumbs-up"></i>&nbsp;<%= questions[i].helpful %>&nbsp;&nbsp;<i class="far fa-thumbs-down"></i>&nbsp;<%= questions[i].notHelpful %></span></p> 
-                   <% if (questions[i].answers.length > 0){ %>
-                    <p><%=questions[i].answers[0].answer%></p> 
-                  <% } %>                  
-                  </div>
-                </div>
+      <% for (i = 0; i < 20; i++) { %>       
+        <div class="card mb-2">
+          <div class="card-header bg-danger text-white">
+            <a href="/question/<%=questions[i].id%>" class="text-white"> <%= questions[i].question.charAt(0).toUpperCase() + questions[i].question.slice(1) %></a>
+          </div>
+          <div class="card-body pb-0" style="font-size: 13px;">
+            <p><%=questions[i].answers.length%> answers&nbsp; 
+              <span><%=questions[i].views%> views &nbsp;
+                <i class="far fa-thumbs-up"></i>&nbsp;
+                <%= questions[i].helpful %>&nbsp;&nbsp;
+                <i class="far fa-thumbs-down"></i>&nbsp;
+                <%= questions[i].notHelpful %>
+              </span>
+            </p>                
+          </div>
+        </div>
               <% } %>
     </div>
-  
-
-
-
     <div class="col-sm-12 col-md-4 col-lg-3"> 
       <div class="card">
         <div class="card-header bg-danger text-white">
@@ -295,11 +186,8 @@
           <br>
             <% } %>
         </div>
-
-      </div>
-      
-      <br>
-      
+      </div>    
+      <br>     
       <div class="card">
         <div class="card-header bg-danger text-white">
           Top Viewed Questions
@@ -313,12 +201,8 @@
               <br>
             <% } %>
         </div>
-
-      </div>
-      
-      <br>
-      
-      
+      </div>    
+      <br>    
       <div class="card">
         <div class="card-header bg-danger text-white">
           Most Helpful
@@ -333,12 +217,7 @@
               <% } %>
         </div>
       </div>
-
-      
-      
-      <br>  
-      
-      
+      <br>      
       <div class="card">
         <div class="card-header bg-danger text-white">
           Least Helpful
@@ -352,37 +231,9 @@
               <br>
               <% } %>
         </div>
-
-      </div>
-      
-      
-      <br>
-      
+      </div>     
+      <br>     
       </div>
     </div>
-
   </div>
-
-
-<style>
-
-
-  @media only screen and (max-width: 760px){
-    .quotesDiv{
-      height: 250px;;
-    }
-  }
-
-    @media only screen and (min-width: 761px){
-    .quotesDiv{
-      height: 100px;;
-    }
-  }
-
-
-</style>
-
-  
-
-
 <% include footer.ejs %>

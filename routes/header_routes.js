@@ -6,36 +6,24 @@ var express = require("express"),
     moment = require('moment'),
     flash = require("connect-flash")
     
-
-
+function getRequest(path, fileName){
+  app.get(path, function(req, res){
+    res.render(fileName);
+  });
+}
 // Signup page route
-app.get("/signup", function(req, res){
-  res.render("signup.ejs");      
-});
-
+getRequest("/signup", "signup.ejs")
 // Login page route
-app.get("/login", function(req, res){
-  res.render("login.ejs");      
-});
-
+getRequest("/login", "login.ejs")
 //Route to new question
-app.get("/newquestion", function(req, res){
-  res.render("newquestion.ejs");
-});
-
+getRequest("/newquestion", "newquestion.ejs")
 //Route to new search
-app.get("/questionsearch", function(req, res){
-  res.render("questionsearch.ejs");
-});
-
+getRequest("/questionsearch", "questionsearch.ejs")
 //Log out route
 app.get("/logout", function(req, res){
   req.logout();
   res.redirect("/");
 });
-
-
-
 // Posting new question
 app.post("/newquestion", function(req, res){
   var newQuestion = {

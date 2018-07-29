@@ -133,7 +133,9 @@ app.post("/question/:id/answer", function(req, res){
         text: 'There is a new answer on the below question that you are following: \n\n' +
               question.question + '\n\n' +
               'Click the below link to check it out! \n\n' +
-              'http://' + req.headers.host + '/question/' + question._id 
+              'http://' + req.headers.host + '/question/' + question._id + '\n\n' + 
+              'To unfollow, click the link below \n\n' +
+              'http://' + req.headers.host + '/question/' + 'unfollow/' + email + question._id
       };
       
       transporter.sendMail(mailOptions, function(error, info){
@@ -146,6 +148,18 @@ app.post("/question/:id/answer", function(req, res){
     });
   }); 
 });
+
+//Unfollow Question
+app.get('/question/unfollow/:email/:id', function(req, res){
+  Question.findById(req.params.id, function(err, question){
+    for (var i = 0; i < question.userEmailsArray.length; i++){
+      if (question.userEmailsArray[i].toLowerCase() === req.params.email.toLowerCase()){
+        question.userEmailsArray.splice(i, 1);
+        question.save();
+      }
+    }
+  });
+})
 
 //Helpful Route
 
@@ -211,28 +225,38 @@ app.post("/unmarknothelpful/:id", function(req, res){
           question.save(question.usersMarkedUnhelpful.splice(i, 1))
         }
       }
-      question.save(question.notHelpful -= 1);
-      question.save(question.views -= 1);
-      res.redirect("/question/" + req.params.id);
-      
+          question.save(question.notHelpful -= 1);
+          question.save(question.views -= 1);
+          res.redirect("/question/" + req.params.id);     
     }
   });
 });
 
 
-
 //Follow Question Route
 app.post("/followquestion/:id", function(req, res){
   Question.findById(req.params.id, function(err, question){
-    if (err){
-      res.send(err);
+
+    var duplicateEmail = 0
+
+    question.userEmailsArray.forEach(function(email){
+      if (email.toLowerCase() === req.body.email.toLowerCase()){
+        duplicateEmail += 1
+      }
+    });
+    if (duplicateEmail > 0){
+      req.flash('success', req.body.email + ' ' + 'is already following this question');
+      res.redirect("/question/" + req.params.id);
     }else{
-    req.flash('success', 'You are now following this question. When a new answer is posted, you will be alerted at ' + req.user.email)
-    question.userEmailsArray.unshift(req.user.email);
-    req.user.followedQuestions.unshift(question)
-    req.user.save();
-    question.save();
-    res.redirect("/question/" + req.params.id);
+      if (err){
+        res.send(err);
+        
+      }else{
+        req.flash('success', 'You are now following this question. When a new answer is posted, you will be alerted at ' + req.body.email)
+        question.userEmailsArray.unshift(req.body.email);
+        question.save();
+        res.redirect("/question/" + req.params.id);
+      }
     }
   });
 });
